@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
-	using Castle.XmlFiles;
+	using Castle.Windsor;
 
 	using CastleTests.Components;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 

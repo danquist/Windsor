@@ -15,10 +15,9 @@
 namespace CastleTests.Config
 {
 	using Castle.Windsor.Installer;
-	using Castle.Windsor.Tests;
-	using Castle.Windsor.Tests.Interceptors;
 
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 

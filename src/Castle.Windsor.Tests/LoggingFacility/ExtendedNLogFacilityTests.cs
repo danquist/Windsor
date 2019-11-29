@@ -13,15 +13,18 @@
 // limitations under the License.
 
 #if CASTLE_SERVICES_LOGGING
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using System;
 
-	using Castle.Facilities.Logging.Tests.Classes;
 	using Castle.MicroKernel.Registration;
 	using Castle.Services.Logging.NLogIntegration;
 	using Castle.Windsor;
+
+	using CastleTests.LoggingFacility.Classes;
+
 	using NLog.Targets;
+
 	using NUnit.Framework;
 
 	[TestFixture]
@@ -53,7 +56,7 @@ namespace Castle.Facilities.Logging.Tests
 			String expectedLogOutput = String.Format("|INFO|{0}|Hello world", typeof(SimpleLoggingComponent).FullName);
 			String actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[0].ToString();
 			actualLogOutput = actualLogOutput.Substring(actualLogOutput.IndexOf('|'));
-			
+
 			Assert.AreEqual(expectedLogOutput, actualLogOutput);
 
 			container.Register(Component.For(typeof(SmtpServer)).Named("component2"));
@@ -66,7 +69,7 @@ namespace Castle.Facilities.Logging.Tests
 			expectedLogOutput = String.Format("|INFO|{0}|InternalSend rbellamy@pteradigm.com jobs@castlestronghold.com We're looking for a few good porgrammars.", typeof(SmtpServer).FullName);
 			actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[1].ToString();
 			actualLogOutput = actualLogOutput.Substring(actualLogOutput.IndexOf('|'));
-			
+
 			Assert.AreEqual(expectedLogOutput, actualLogOutput.ToString());
 
 		}

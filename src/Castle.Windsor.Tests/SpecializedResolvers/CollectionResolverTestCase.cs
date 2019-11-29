@@ -12,20 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.SpecializedResolvers
+namespace CastleTests.SpecializedResolvers
 {
 	using System;
 	using System.Linq;
 
-	using Castle.Core.Internal;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 	using Castle.Windsor;
 
-	using CastleTests;
 	using CastleTests.Components;
-	using CastleTests.SpecializedResolvers;
 
 	using NUnit.Framework;
 
@@ -41,9 +38,9 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void Composite_service_can_be_resolved_without_triggering_circular_dependency_detection_fuse()
 		{
 			Container.Register(Classes.FromAssembly(GetCurrentAssembly())
-			                   	.BasedOn<IEmptyService>()
-			                   	.WithService.Base()
-			                   	.ConfigureFor<EmptyServiceComposite>(r => r.Forward<EmptyServiceComposite>()));
+								   .BasedOn<IEmptyService>()
+								   .WithService.Base()
+								   .ConfigureFor<EmptyServiceComposite>(r => r.Forward<EmptyServiceComposite>()));
 
 			var composite = Container.Resolve<EmptyServiceComposite>();
 			Assert.AreEqual(5, composite.Inner.Length);
@@ -68,8 +65,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnArrayOfServices_OnConstructor()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<ArrayDepAsConstructor>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<ArrayDepAsConstructor>());
 
 			var component = Container.Resolve<ArrayDepAsConstructor>();
 
@@ -140,8 +137,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnArrayOfServices_OnProperty()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<ArrayDepAsProperty>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<ArrayDepAsProperty>());
 
 			var component = Container.Resolve<ArrayDepAsProperty>();
 
@@ -178,8 +175,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnCollectionOfServices_OnConstructor()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<CollectionDepAsConstructor>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<CollectionDepAsConstructor>());
 
 			var component = Container.Resolve<CollectionDepAsConstructor>();
 
@@ -215,8 +212,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnCollectionOfServices_OnProperty()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<CollectionDepAsProperty>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<CollectionDepAsProperty>());
 
 			var component = Container.Resolve<CollectionDepAsProperty>();
 
@@ -252,8 +249,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnEnumerableOfServices_OnConstructor()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<EnumerableDepAsProperty>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<EnumerableDepAsProperty>());
 
 			var component = Container.Resolve<EnumerableDepAsProperty>();
 
@@ -289,8 +286,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnEnumerableOfServices_OnProperty()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<EnumerableDepAsProperty>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<EnumerableDepAsProperty>());
 
 			var component = Container.Resolve<EnumerableDepAsProperty>();
 
@@ -327,8 +324,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnListOfServices_OnConstructor()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<ListDepAsConstructor>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<ListDepAsConstructor>());
 
 			var component = Container.Resolve<ListDepAsConstructor>();
 
@@ -364,8 +361,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnListOfServices_OnProperty()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<ListDepAsProperty>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<ListDepAsProperty>());
 
 			var component = Container.Resolve<ListDepAsProperty>();
 
@@ -402,8 +399,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOn_ref_ArrayOfServices_OnConstructor()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<ArrayRefDepAsConstructor>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<ArrayRefDepAsConstructor>());
 
 			var component = Container.Resolve<ArrayRefDepAsConstructor>();
 
@@ -475,8 +472,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void List_is_readonly()
 		{
 			Container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                   Component.For<ListDepAsConstructor>());
+							   Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							   Component.For<ListDepAsConstructor>());
 
 			var component = Container.Resolve<ListDepAsConstructor>();
 

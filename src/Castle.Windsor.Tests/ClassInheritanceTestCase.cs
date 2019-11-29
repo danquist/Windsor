@@ -12,21 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle
+namespace CastleTests
 {
 	using System;
 	using System.Linq;
 
 	using Castle.DynamicProxy;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests;
-	using Castle.Windsor.Tests.ClassComponents;
-	using Castle.Windsor.Tests.Interceptors;
 
-	using CastleTests;
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -83,7 +79,7 @@ namespace Castle
 		{
 			RegisterInterceptor();
 			Container.Register(Component.For<JohnParent, IEmptyService, JohnGrandparent>().ImplementedBy<JohnChild>()
-			                   	.LifeStyle.Transient.Interceptors<CountingInterceptor>());
+								   .LifeStyle.Transient.Interceptors<CountingInterceptor>());
 
 			var obj = Container.Resolve<JohnParent>();
 
@@ -97,7 +93,7 @@ namespace Castle
 		{
 			RegisterInterceptor();
 			Container.Register(Component.For<IGeneric<IEmployee>, JohnParent, IEmptyService, JohnGrandparent>().ImplementedBy(typeof(JohnChild))
-			                   	.LifeStyle.Transient.Interceptors<CountingInterceptor>());
+								   .LifeStyle.Transient.Interceptors<CountingInterceptor>());
 
 			var obj = Container.Resolve<JohnParent>();
 

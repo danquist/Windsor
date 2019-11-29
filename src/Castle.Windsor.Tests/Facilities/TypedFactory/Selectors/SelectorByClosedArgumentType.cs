@@ -19,7 +19,8 @@ namespace CastleTests.Facilities.TypedFactory.Selectors
 
 	using Castle.Facilities.TypedFactory;
 	using Castle.MicroKernel;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
+
+	using CastleTests.Facilities.TypedFactory.Components;
 
 	public class SelectorByClosedArgumentType : DefaultTypedFactoryComponentSelector
 	{

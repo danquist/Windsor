@@ -13,19 +13,22 @@
 // limitations under the License.
 
 #if CASTLE_SERVICES_LOGGING
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using System;
 	using System.IO;
 
-	using Castle.Facilities.Logging.Tests.Classes;
 	using Castle.MicroKernel.Registration;
 	using Castle.Services.Logging.Log4netIntegration;
 	using Castle.Windsor;
+
+	using CastleTests.LoggingFacility.Classes;
+
 	using log4net;
 	using log4net.Appender;
 	using log4net.Layout;
 	using log4net.Repository.Hierarchy;
+
 	using NUnit.Framework;
 
 	/// <summary>
@@ -57,7 +60,7 @@ namespace Castle.Facilities.Logging.Tests
 			test.DoSomething();
 
 			String expectedLogOutput = String.Format("[INFO ] [{0}] - Hello world" + Environment.NewLine, typeof(SimpleLoggingComponent).FullName);
-			MemoryAppender memoryAppender = ((Hierarchy) LogManager.GetRepository()).Root.GetAppender("memory") as MemoryAppender;
+			MemoryAppender memoryAppender = ((Hierarchy)LogManager.GetRepository()).Root.GetAppender("memory") as MemoryAppender;
 			TextWriter actualLogOutput = new StringWriter();
 			PatternLayout patternLayout = new PatternLayout("[%-5level] [%logger] - %message%newline");
 			patternLayout.Format(actualLogOutput, memoryAppender.GetEvents()[0]);

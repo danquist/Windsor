@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Facilities.Logging.Tests.Classes
+namespace CastleTests.LoggingFacility.Classes
 {
 	using System;
+
 	using Castle.Core.Logging;
 
 	public class SmtpServer : ISmtpServer

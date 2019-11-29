@@ -14,8 +14,6 @@
 
 namespace CastleTests.ClassComponents
 {
-	using Castle.MicroKernel.Tests.ClassComponents;
-
 	public class CustomerValidatorAndRepository : IValidator<ICustomer>, IRepository<ICustomer>
 	{
 		public ICustomer Find()

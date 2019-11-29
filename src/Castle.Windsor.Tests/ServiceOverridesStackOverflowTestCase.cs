@@ -12,12 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using Castle.XmlFiles;
+	using Castle.Windsor;
+
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 

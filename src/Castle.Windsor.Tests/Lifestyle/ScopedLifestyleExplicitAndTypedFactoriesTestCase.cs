@@ -17,9 +17,9 @@ namespace CastleTests.Lifestyle
 	using Castle.Facilities.TypedFactory;
 	using Castle.MicroKernel.Lifestyle;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Delegates;
 
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Delegates;
 
 	using NUnit.Framework;
 
@@ -35,7 +35,7 @@ namespace CastleTests.Lifestyle
 		public void Can_obtain_scoped_component_via_factory()
 		{
 			Container.Register(Component.For<UsesDisposableFooDelegate>().LifestyleTransient(),
-			                   Component.For<DisposableFoo>().LifestyleScoped());
+							   Component.For<DisposableFoo>().LifestyleScoped());
 
 			var instance = Container.Resolve<UsesDisposableFooDelegate>();
 			using (Container.BeginScope())
@@ -48,8 +48,8 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_and_outsideinstances_reused_properly()
 		{
 			Container.Register(Component.For<UsesFooAndDelegate>().LifeStyle.Transient,
-			                   Component.For<Foo>().LifeStyle.Scoped()
-			                   	.DependsOn(Parameter.ForKey("number").Eq("1")));
+							   Component.For<Foo>().LifeStyle.Scoped()
+								   .DependsOn(Parameter.ForKey("number").Eq("1")));
 			using (Container.BeginScope())
 			{
 				var instance = Container.Resolve<UsesFooAndDelegate>();
@@ -64,7 +64,7 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_instances_reused_properly()
 		{
 			Container.Register(Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient,
-			                   Component.For<DisposableFoo>().LifestyleScoped());
+							   Component.For<DisposableFoo>().LifestyleScoped());
 			using (Container.BeginScope())
 			{
 				var instance = Container.Resolve<UsesDisposableFooDelegate>();
@@ -80,7 +80,7 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_reused_properly_across_factories()
 		{
 			Container.Register(Component.For<UsesTwoFooDelegates>().LifeStyle.Transient,
-			                   Component.For<Foo>().LifestyleScoped());
+							   Component.For<Foo>().LifestyleScoped());
 
 			var instance = Container.Resolve<UsesTwoFooDelegates>();
 			using (Container.BeginScope())

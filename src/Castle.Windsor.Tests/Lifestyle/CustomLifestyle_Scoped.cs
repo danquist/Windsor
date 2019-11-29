@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Lifestyle
+namespace CastleTests.Lifestyle
 {
 	using System;
 
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Context;
 	using Castle.MicroKernel.Lifestyle;
 

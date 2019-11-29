@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.ClassComponents;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -29,7 +28,7 @@ namespace Castle.Windsor.Tests
 		public void Can_resolve_type_with_by_ref_dependency()
 		{
 			Container.Register(Component.For<A>(),
-			                   Component.For<HasByRefCtorArgument>());
+							   Component.For<HasByRefCtorArgument>());
 
 			Container.Resolve<HasByRefCtorArgument>();
 		}

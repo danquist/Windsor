@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using System;
 	using System.Collections.Generic;
 
 	using Castle.Core;
 	using Castle.MicroKernel.Registration;
+	using Castle.Windsor;
 
 	using NUnit.Framework;
 
@@ -68,7 +69,7 @@ namespace Castle.Windsor.Tests
 			container.Install(
 				new ActionBasedInstaller(
 					c => c.Register(Component.For<IMyService>().ImplementedBy<MyService>().LifeStyle.Transient,
-					                Component.For<IMyComponent>().ImplementedBy<MyComponent>()))
+									Component.For<IMyComponent>().ImplementedBy<MyComponent>()))
 				);
 
 			var component = container.Resolve<IMyComponent>();

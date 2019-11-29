@@ -19,7 +19,6 @@ namespace CastleTests
 
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
@@ -175,10 +174,10 @@ namespace CastleTests
 		public void Filter_gets_all_assignable_handlers_not_exiplicitly_registered_for_given_service()
 		{
 			Container.Register(Component.For<Task5>(),
-			                   Component.For<Task3>(),
-			                   Component.For<Task2>(),
-			                   Component.For<Task4>(),
-			                   Component.For<Task1>());
+							   Component.For<Task3>(),
+							   Component.For<Task2>(),
+							   Component.For<Task4>(),
+							   Component.For<Task1>());
 
 			Container.Kernel.AddHandlersFilter(new ReturnAllHandlersFilter());
 
@@ -191,7 +190,7 @@ namespace CastleTests
 		public void Filter_gets_open_generic_handlers_when_generic_service_requested()
 		{
 			Container.Register(Component.For<IGeneric<A>>().ImplementedBy<GenericImpl1<A>>(),
-			                   Component.For(typeof(GenericImpl2<>)));
+							   Component.For(typeof(GenericImpl2<>)));
 			var filter = new DelegatingFilter(typeof(IGeneric<A>));
 			Kernel.AddHandlersFilter(filter);
 
@@ -204,10 +203,10 @@ namespace CastleTests
 		public void Filter_returning_empty_collection_respected()
 		{
 			Container.Register(Component.For<ISomeTask>().ImplementedBy<Task5>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task4>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task3>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task2>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task1>());
+							   Component.For<ISomeTask>().ImplementedBy<Task4>(),
+							   Component.For<ISomeTask>().ImplementedBy<Task3>(),
+							   Component.For<ISomeTask>().ImplementedBy<Task2>(),
+							   Component.For<ISomeTask>().ImplementedBy<Task1>());
 
 			Container.Kernel.AddHandlersFilter(new DelegatingFilter(typeof(ISomeTask), h => false));
 
@@ -220,8 +219,8 @@ namespace CastleTests
 		public void HandlerFilterGetsCalledLikeExpected()
 		{
 			Container.Register(Component.For<ISomeService>().ImplementedBy<FirstImplementation>(),
-			                   Component.For<ISomeService>().ImplementedBy<SecondImplementation>(),
-			                   Component.For<ISomeService>().ImplementedBy<ThirdImplementation>());
+							   Component.For<ISomeService>().ImplementedBy<SecondImplementation>(),
+							   Component.For<ISomeService>().ImplementedBy<ThirdImplementation>());
 
 			var filter = new TestHandlersFilter();
 			Container.Kernel.AddHandlersFilter(filter);
@@ -235,10 +234,10 @@ namespace CastleTests
 		public void HandlerFiltersPrioritizationAndOrderingIsRespected()
 		{
 			Container.Register(Component.For<ISomeTask>().ImplementedBy<Task5>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task3>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task2>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task4>(),
-			                   Component.For<ISomeTask>().ImplementedBy<Task1>());
+							   Component.For<ISomeTask>().ImplementedBy<Task3>(),
+							   Component.For<ISomeTask>().ImplementedBy<Task2>(),
+							   Component.For<ISomeTask>().ImplementedBy<Task4>(),
+							   Component.For<ISomeTask>().ImplementedBy<Task1>());
 
 			Container.Kernel.AddHandlersFilter(new FilterThatRemovedFourthTaskAndOrdersTheRest());
 

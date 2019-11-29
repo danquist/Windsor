@@ -18,9 +18,9 @@ namespace CastleTests.Lifestyle
 
 	using Castle.Facilities.TypedFactory;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Delegates;
 
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Delegates;
 
 	using NUnit.Framework;
 
@@ -37,7 +37,7 @@ namespace CastleTests.Lifestyle
 		public void Can_obtain_scoped_component_via_factory()
 		{
 			Container.Register(Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient,
-			                   Component.For<DisposableFoo>().LifeStyle.BoundTo<UsesDisposableFooDelegate>());
+							   Component.For<DisposableFoo>().LifeStyle.BoundTo<UsesDisposableFooDelegate>());
 
 			var instance = Container.Resolve<UsesDisposableFooDelegate>();
 
@@ -48,8 +48,8 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_and_outsideinstances_reused_properly()
 		{
 			Container.Register(Component.For<UsesFooAndDelegate>().LifeStyle.Transient,
-			                   Component.For<Foo>().LifeStyle.BoundTo<UsesFooAndDelegate>()
-			                   	.DependsOn(Parameter.ForKey("number").Eq("1")));
+							   Component.For<Foo>().LifeStyle.BoundTo<UsesFooAndDelegate>()
+								   .DependsOn(Parameter.ForKey("number").Eq("1")));
 
 			var instance = Container.Resolve<UsesFooAndDelegate>();
 
@@ -63,7 +63,7 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_instances_reused_properly()
 		{
 			Container.Register(Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient,
-			                   Component.For<DisposableFoo>().LifeStyle.BoundTo<UsesDisposableFooDelegate>());
+							   Component.For<DisposableFoo>().LifeStyle.BoundTo<UsesDisposableFooDelegate>());
 
 			var instance = Container.Resolve<UsesDisposableFooDelegate>();
 
@@ -77,7 +77,7 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_reused_properly_across_factories()
 		{
 			Container.Register(Component.For<UsesTwoFooDelegates>().LifeStyle.Transient,
-			                   Component.For<Foo>().LifeStyle.BoundTo<UsesTwoFooDelegates>());
+							   Component.For<Foo>().LifeStyle.BoundTo<UsesTwoFooDelegates>());
 
 			var instance = Container.Resolve<UsesTwoFooDelegates>();
 
@@ -93,8 +93,8 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_two_roots_but_factory_invoked_by_yet_another_object()
 		{
 			Container.Register(Component.For<UsesFooDelegate>().LifeStyle.Transient,
-			                   Component.For<Foo>().LifeStyle.BoundTo<UsesFooDelegate>(),
-			                   Component.For<Func<Foo>>().LifeStyle.Singleton);
+							   Component.For<Foo>().LifeStyle.BoundTo<UsesFooDelegate>(),
+							   Component.For<Func<Foo>>().LifeStyle.Singleton);
 
 			var rootOne = Container.Resolve<UsesFooDelegate>();
 
@@ -113,8 +113,8 @@ namespace CastleTests.Lifestyle
 		public void Scoped_component_via_factory_two_roots_each_gets_its_own_instance()
 		{
 			Container.Register(Component.For<UsesFooDelegate>().LifeStyle.Transient,
-			                   Component.For<Foo>().LifeStyle.BoundTo<UsesFooDelegate>(),
-			                   Component.For<Func<Foo>>().LifeStyle.Singleton);
+							   Component.For<Foo>().LifeStyle.BoundTo<UsesFooDelegate>(),
+							   Component.For<Func<Foo>>().LifeStyle.Singleton);
 
 			var rootOne = Container.Resolve<UsesFooDelegate>();
 

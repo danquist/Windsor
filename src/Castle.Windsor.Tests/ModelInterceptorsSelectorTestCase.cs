@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using System;
 
 	using Castle.Core;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Interceptors;
+	using Castle.Windsor;
 
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -32,10 +33,10 @@ namespace Castle.Windsor.Tests
 		{
 			IWindsorContainer container = new WindsorContainer();
 			container.Register(Component.For<WasCalledInterceptor>(),
-			                   Component.For<IWatcher>()
-			                   	.ImplementedBy<BirdWatcher>()
-			                   	.Named("bird.watcher")
-			                   	.LifeStyle.Transient);
+							   Component.For<IWatcher>()
+								   .ImplementedBy<BirdWatcher>()
+								   .Named("bird.watcher")
+								   .LifeStyle.Transient);
 
 			var selector = new WatcherInterceptorSelector();
 			container.Kernel.ProxyFactory.AddInterceptorSelector(selector);
@@ -58,8 +59,8 @@ namespace Castle.Windsor.Tests
 		{
 			IWindsorContainer container = new WindsorContainer();
 			container.Register(Component.For<CountingInterceptor>(),
-			                   Component.For<WasCalledInterceptor>(),
-			                   Component.For<IWatcher>().ImplementedBy<BirdWatcher>().Named("bird.watcher").LifeStyle.Transient);
+							   Component.For<WasCalledInterceptor>(),
+							   Component.For<IWatcher>().ImplementedBy<BirdWatcher>().Named("bird.watcher").LifeStyle.Transient);
 
 			var selector = new WatcherInterceptorSelector { Interceptors = InterceptorKind.Dummy };
 			container.Kernel.ProxyFactory.AddInterceptorSelector(selector);
@@ -113,7 +114,7 @@ namespace Castle.Windsor.Tests
 			var container = new WindsorContainer();
 			container.Kernel.ProxyFactory.AddInterceptorSelector(new ByTypeInterceptorSelector(typeof(DisposableInterceptor)));
 			container.Register(Component.For<DisposableInterceptor>(),
-			                   Component.For<A>().LifeStyle.Transient);
+							   Component.For<A>().LifeStyle.Transient);
 
 			var a = container.Resolve<A>();
 			Assert.AreEqual(1, DisposableInterceptor.InstancesCreated);

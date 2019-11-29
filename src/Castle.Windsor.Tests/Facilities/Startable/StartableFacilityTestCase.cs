@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Facilities.Startable
+namespace CastleTests.Facilities.Startable
 {
 	using System;
 	using System.Collections.Generic;
@@ -24,9 +24,9 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.ModelBuilder;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests.ClassComponents;
-	using Castle.Windsor.Tests.Facilities.Startable.Components;
+
+	using CastleTests.ClassComponents;
+	using CastleTests.Facilities.Startable.Components;
 
 	using NUnit.Framework;
 
@@ -99,8 +99,8 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 			ClassWithInstanceCount.InstancesCount = 0;
 			kernel.AddFacility<StartableFacility>(f => f.DeferredTryStart());
 			kernel.Register(Classes.FromAssembly(currentAssembly)
-			                	.Where(t => t == typeof(ClassWithInstanceCount))
-			                	.Configure(c => c.Start()));
+								.Where(t => t == typeof(ClassWithInstanceCount))
+								.Configure(c => c.Start()));
 			Assert.AreEqual(1, ClassWithInstanceCount.InstancesCount);
 		}
 
@@ -161,8 +161,8 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 
 			var ex =
 				Assert.Throws<Exception>(() =>
-				                         kernel.Register(Component.For<StartableWithError>(),
-				                                         Component.For<ICommon>().ImplementedBy<CommonImpl1>()));
+										 kernel.Register(Component.For<StartableWithError>(),
+														 Component.For<ICommon>().ImplementedBy<CommonImpl1>()));
 
 			// Every additional registration causes Start to be called again and again...
 			Assert.AreEqual("This should go bonk", ex.Message);
@@ -252,7 +252,7 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 			kernel.AddFacility<StartableFacility>();
 
 			var dependencies = new Dictionary<string, object> { { "config", 1 } };
-			kernel.Register(Component.For<StartableComponentCustomDependencies>().DependsOn(dependencies));;
+			kernel.Register(Component.For<StartableComponentCustomDependencies>().DependsOn(dependencies)); ;
 
 			Assert.IsTrue(startableCreatedBeforeResolved, "Component was not properly started");
 
@@ -271,8 +271,8 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 		{
 			kernel.AddFacility<StartableFacility>();
 			kernel.Register(Component.For<WithOverloads>()
-			                	.StartUsingMethod("Start")
-			                	.StopUsingMethod("Stop"));
+								.StartUsingMethod("Start")
+								.StopUsingMethod("Stop"));
 			var c = kernel.Resolve<WithOverloads>();
 			Assert.IsTrue(c.StartCalled);
 			kernel.ReleaseComponent(c);

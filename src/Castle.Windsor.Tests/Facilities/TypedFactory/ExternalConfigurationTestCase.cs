@@ -16,9 +16,9 @@ namespace CastleTests.Facilities.TypedFactory
 {
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor.Installer;
-	using Castle.Windsor.Tests;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
+
+	using CastleTests.Facilities.TypedFactory.Components;
+	using CastleTests.Facilities.TypedFactory.Factories;
 
 	using NUnit.Framework;
 

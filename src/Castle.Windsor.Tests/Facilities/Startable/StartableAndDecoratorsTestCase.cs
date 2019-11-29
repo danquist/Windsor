@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Facilities.Startable
+namespace CastleTests.Facilities.Startable
 {
 	using Castle.Facilities.Startable;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.SubSystems.Configuration;
+	using Castle.Windsor;
 
 	using CastleTests.Components;
 
@@ -29,10 +30,10 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 		private class AllInstaller : IWindsorInstaller
 		{
 			public void Install(IWindsorContainer container,
-			                    IConfigurationStore store)
+								IConfigurationStore store)
 			{
 				container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceDecorator>(),
-				                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
+								   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
 				container.Register(Component.For<UsesIEmptyService>().Start());
 			}
 		}
@@ -40,17 +41,17 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 		private class DependenciesInstaller : IWindsorInstaller
 		{
 			public void Install(IWindsorContainer container,
-			                    IConfigurationStore store)
+								IConfigurationStore store)
 			{
 				container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceDecorator>(),
-				                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
+								   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
 			}
 		}
 
 		private class StartableInstaller : IWindsorInstaller
 		{
 			public void Install(IWindsorContainer container,
-			                    IConfigurationStore store)
+								IConfigurationStore store)
 			{
 				container.Register(Component.For<UsesIEmptyService>().Start());
 			}
@@ -115,7 +116,7 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 			{
 				container.AddFacility<StartableFacility>(f => f.DeferredStart());
 				container.Install(new DependenciesInstaller(),
-				                  new StartableInstaller());
+								  new StartableInstaller());
 			}
 		}
 
@@ -154,7 +155,7 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 				{
 					container.Register(Component.For<UsesIEmptyService>().Start());
 					container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceDecorator>(),
-					                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
+									   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
 				});
 			}
 		}
@@ -166,7 +167,7 @@ namespace Castle.Windsor.Tests.Facilities.Startable
 			{
 				container.AddFacility<StartableFacility>(f => f.DeferredStart());
 				container.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceDecorator>(),
-				                   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
+								   Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>());
 				container.Register(Component.For<UsesIEmptyService>().Start());
 			}
 		}

@@ -19,9 +19,9 @@ namespace CastleTests.Lifestyle
 
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
-	using Castle.Windsor.Tests.ClassComponents;
 
 	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;

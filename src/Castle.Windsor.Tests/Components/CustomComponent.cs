@@ -15,7 +15,8 @@
 namespace CastleTests.Components
 {
 	using Castle.Core;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	/// <summary>
 	///   Summary description for CustomComponent.

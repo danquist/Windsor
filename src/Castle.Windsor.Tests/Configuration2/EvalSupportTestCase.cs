@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Configuration2
+namespace CastleTests.Configuration2
 {
 	using System;
 
 	using Castle.Core.Internal;
+	using Castle.Windsor;
 	using Castle.Windsor.Configuration.Interpreters;
 
 	using CastleTests.Components;

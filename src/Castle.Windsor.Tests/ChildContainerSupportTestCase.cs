@@ -19,7 +19,6 @@ namespace CastleTests
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
 	using Castle.Windsor.Configuration.Interpreters;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
 
 	using CastleTests.Components;
 

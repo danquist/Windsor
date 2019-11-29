@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using Castle.Core;
-
-namespace Castle.MicroKernel.Tests.Bugs.Ioc113
+namespace CastleTests.Bugs.Ioc113
 {
+	using System;
+	using System.Collections.Generic;
+
+	using Castle.Core;
+
 	public class StartableDisposableAndInitializableComponent : IInitializable, IDisposable, IStartable
 	{
 		public IList<SdiComponentMethods> calledMethods;

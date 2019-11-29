@@ -16,7 +16,6 @@ namespace CastleTests.Diagnostics
 {
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 	using Castle.Windsor.Diagnostics;
 
 	using CastleTests.ClassComponents;
@@ -80,8 +79,8 @@ namespace CastleTests.Diagnostics
 		public void Can_detect_components_having_duplicated_dependencies_via_service_override()
 		{
 			Container.Register(Component.For<HasObjectPropertyAndTypedCtorParameterDifferentName>()
-				                   .DependsOn(Dependency.OnComponent(typeof(object), typeof(EmptyService2Impl1)),
-				                              Dependency.OnComponent(typeof(IEmptyService), typeof(EmptyService2Impl1))));
+								   .DependsOn(Dependency.OnComponent(typeof(object), typeof(EmptyService2Impl1)),
+											  Dependency.OnComponent(typeof(IEmptyService), typeof(EmptyService2Impl1))));
 			var result = diagnostic.Inspect();
 			CollectionAssert.IsNotEmpty(result);
 		}

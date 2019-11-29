@@ -12,10 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Generics
+namespace CastleTests.Generics
 {
-	using Castle.Windsor.Tests;
-
 	using CastleTests.Components;
 
 	public interface IARepository : CastleTests.Generics.IRepository<A>

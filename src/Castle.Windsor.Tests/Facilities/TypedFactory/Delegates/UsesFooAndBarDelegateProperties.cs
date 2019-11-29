@@ -16,8 +16,6 @@ namespace CastleTests.Facilities.TypedFactory.Delegates
 {
 	using System;
 
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Delegates;
-
 	public class UsesFooAndBarDelegateProperties
 	{
 		public Func<Bar> BarFactory { get; set; }

@@ -17,9 +17,9 @@ namespace CastleTests.Facilities.TypedFactory
 	using Castle.Facilities.TypedFactory;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
 
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Factories;
 	using CastleTests.Facilities.TypedFactory.Selectors;
 	using NUnit.Framework;
 
@@ -36,8 +36,8 @@ namespace CastleTests.Facilities.TypedFactory
 		{
 
 			Container.Register(Component.For<A>(),
-			                   Component.For<A>().Named("name"),
-			                   Component.For<IGenericFactory<A>>().AsFactory(x => x.SelectedWith(new WithNameSelector("non existing name"))));
+							   Component.For<A>().Named("name"),
+							   Component.For<IGenericFactory<A>>().AsFactory(x => x.SelectedWith(new WithNameSelector("non existing name"))));
 
 			var factory = Container.Resolve<IGenericFactory<A>>();
 

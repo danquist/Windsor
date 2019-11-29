@@ -16,9 +16,7 @@ namespace CastleTests
 {
 	using System;
 
-	using Castle.ClassComponents;
 	using Castle.Core.Internal;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;

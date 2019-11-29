@@ -19,7 +19,8 @@ namespace CastleTests.Facilities
 	using Castle.Core.Configuration;
 	using Castle.Facilities.Startable;
 	using Castle.MicroKernel;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 

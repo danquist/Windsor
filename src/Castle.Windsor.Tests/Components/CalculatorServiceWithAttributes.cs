@@ -17,7 +17,8 @@ namespace CastleTests.Components
 	using System;
 
 	using Castle.Core;
-	using Castle.Windsor.Tests.Interceptors;
+
+	using CastleTests.Interceptors;
 
 	/// <summary>
 	///   Summary description for CalculatorServiceWithAttributes.

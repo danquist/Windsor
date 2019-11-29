@@ -22,10 +22,8 @@ namespace CastleTests.Lifestyle
 	using Castle.MicroKernel.Context;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.MicroKernel.Tests.Lifestyle;
-	using Castle.Windsor.Tests.ClassComponents;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 	using CastleTests.Generics;
 
@@ -43,7 +41,7 @@ namespace CastleTests.Lifestyle
 		}
 
 		private void TestLifestyleWithServiceAndSameness(Type componentType, LifestyleType lifestyle, bool overwrite,
-		                                                 bool areSame)
+														 bool areSame)
 		{
 			var key = TestHandlersLifestyleWithService(componentType, lifestyle, overwrite);
 			TestSameness(key, areSame);
@@ -96,10 +94,10 @@ namespace CastleTests.Lifestyle
 		public void BadLifestyleSetProgromatically()
 		{
 			Assert.Throws<ArgumentOutOfRangeException>(() =>
-			                                           Kernel.Register(Component.For<IComponent>()
-			                                                           	.ImplementedBy(typeof(TrivialComponent))
-			                                                           	.Named("a")
-			                                                           	.LifeStyle.Is(LifestyleType.Undefined)));
+													   Kernel.Register(Component.For<IComponent>()
+																		   .ImplementedBy(typeof(TrivialComponent))
+																		   .Named("a")
+																		   .LifeStyle.Is(LifestyleType.Undefined)));
 		}
 
 		[Test]
@@ -140,7 +138,7 @@ namespace CastleTests.Lifestyle
 			TestHandlersLifestyleWithService(typeof(TrivialComponent), LifestyleType.Singleton, false);
 			TestHandlersLifestyleWithService(typeof(TrivialComponent), LifestyleType.Thread, false);
 			TestHandlersLifestyleWithService(typeof(TrivialComponent), LifestyleType.Transient, false);
-		
+
 			TestLifestyleAndSameness(typeof(PerThreadComponent), LifestyleType.Transient, true, false);
 			TestLifestyleAndSameness(typeof(SingletonComponent), LifestyleType.Transient, true, false);
 			TestLifestyleAndSameness(typeof(TransientComponent), LifestyleType.Singleton, true, true);

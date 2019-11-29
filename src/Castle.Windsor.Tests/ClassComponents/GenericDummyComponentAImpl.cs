@@ -14,9 +14,8 @@
 
 namespace CastleTests.ClassComponents
 {
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
-
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Components;
 
 	public class GenericDummyComponentAImpl<T> : A, IGeneric<T>, IDummyComponent<T>, IMarkerInterface
 	{

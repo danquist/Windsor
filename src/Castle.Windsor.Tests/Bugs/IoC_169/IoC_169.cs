@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Bugs.IoC_169
+namespace CastleTests.Bugs.IoC_169
 {
 	using System.Reflection;
 

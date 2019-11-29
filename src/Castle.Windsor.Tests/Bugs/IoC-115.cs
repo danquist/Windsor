@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Bugs
+namespace CastleTests.Bugs
 {
 	using Castle.MicroKernel.Registration;
-
-	using CastleTests;
+	using Castle.Windsor;
 
 	using NUnit.Framework;
 
@@ -75,7 +74,7 @@ namespace Castle.Windsor.Tests.Bugs
 
 			Container.Register(Component.For<IParentService>().ImplementedBy<ParentService>());
 			child.Register(Component.For<IChildService1>().ImplementedBy<ChildService1>(),
-			               Component.For<IChildService2>().ImplementedBy<ChildService2>());
+						   Component.For<IChildService2>().ImplementedBy<ChildService2>());
 
 			// dependency chain goes ChildService1 --> (I)ChildService2 --> IParentService
 			Assert.DoesNotThrow(() => child.Resolve<IChildService1>());
@@ -89,7 +88,7 @@ namespace Castle.Windsor.Tests.Bugs
 			Container.AddChildContainer(child);
 
 			Container.Register(Component.For<IParentService>().ImplementedBy<ParentService>(),
-			                   Component.For<IChildService2>().ImplementedBy<ChildService2>());
+							   Component.For<IChildService2>().ImplementedBy<ChildService2>());
 			child.Register(Component.For<IParentService>().ImplementedBy<AnotherParentService>());
 
 			var resolve = child.Resolve<IChildService2>();

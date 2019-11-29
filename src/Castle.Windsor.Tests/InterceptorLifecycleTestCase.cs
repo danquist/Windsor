@@ -15,9 +15,9 @@
 namespace CastleTests
 {
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Interceptors;
 
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -29,11 +29,11 @@ namespace CastleTests
 			DisposableInterceptor.InstancesCreated = 0;
 			DisposableInterceptor.InstancesDisposed = 0;
 			Container.Register(Component.For<DisposableInterceptor>().LifestyleTransient(),
-			                   Component.For<A>().LifestyleTransient().Interceptors<DisposableInterceptor>());
+							   Component.For<A>().LifestyleTransient().Interceptors<DisposableInterceptor>());
 
 			var a = Container.Resolve<A>();
 
-			Assert.AreEqual(1,DisposableInterceptor.InstancesCreated);
+			Assert.AreEqual(1, DisposableInterceptor.InstancesCreated);
 
 			Container.Release(a);
 

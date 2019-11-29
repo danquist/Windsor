@@ -14,8 +14,6 @@
 
 namespace CastleTests.Components
 {
-	using Castle.Windsor.Tests;
-
 	public class UnresolvalbeDependency : IDependency
 	{
 		public UnresolvalbeDependency(A a)

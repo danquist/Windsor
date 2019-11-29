@@ -12,14 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Handlers
+namespace CastleTests.Handlers
 {
 	using Castle.Core;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.ModelBuilder;
 	using Castle.MicroKernel.Registration;
 
-	using CastleTests;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -55,7 +54,7 @@ namespace Castle.Windsor.Tests.Handlers
 		public void Component_With_Explicit_Required_Dependency_Will_Be_Marked_Waiting()
 		{
 			Container.Register(Component.For<AProp>()
-			                   	.AddDescriptor(new ExplicitRequiredDependencyDescriptor()));
+								   .AddDescriptor(new ExplicitRequiredDependencyDescriptor()));
 
 			var handler = Container.Kernel.GetHandler(typeof(AProp));
 			Assert.AreEqual(HandlerState.WaitingDependency, handler.CurrentState);
@@ -65,7 +64,7 @@ namespace Castle.Windsor.Tests.Handlers
 		public void Component_With_Required_Properies_Will_Be_Marked_Waiting()
 		{
 			Container.Register(Component.For<AProp>()
-			                   	.AddDescriptor(new RequirePropertyDescriptor()));
+								   .AddDescriptor(new RequirePropertyDescriptor()));
 
 			var handler = Container.Kernel.GetHandler(typeof(AProp));
 			Assert.AreEqual(HandlerState.WaitingDependency, handler.CurrentState);

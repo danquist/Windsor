@@ -12,12 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests.Windsor.Tests
 {
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.ClassComponents;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -29,7 +28,7 @@ namespace Castle.Windsor.Tests
 		{
 			SimpleServiceDisposable.DisposedCount = 0;
 			Container.Register(Component.For<HasCtorDependency>().LifeStyle.Transient,
-			                   Component.For<ISimpleService>().ImplementedBy<SimpleServiceDisposable>());
+							   Component.For<ISimpleService>().ImplementedBy<SimpleServiceDisposable>());
 
 			Container.Resolve<HasCtorDependency>();
 			CleanUp();
@@ -43,7 +42,7 @@ namespace Castle.Windsor.Tests
 		{
 			SimpleServiceDisposable.DisposedCount = 0;
 			Container.Register(Component.For<HasCtorDependency>().LifeStyle.Transient,
-			                   Component.For<ISimpleService>().ImplementedBy<SimpleServiceDisposable>());
+							   Component.For<ISimpleService>().ImplementedBy<SimpleServiceDisposable>());
 
 			var root = Container.Resolve<HasCtorDependency>();
 

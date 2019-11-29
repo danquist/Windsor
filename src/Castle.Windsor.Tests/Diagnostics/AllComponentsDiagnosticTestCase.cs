@@ -18,7 +18,6 @@ namespace CastleTests.Diagnostics
 
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 	using Castle.Windsor;
 	using Castle.Windsor.Diagnostics;
 
@@ -26,7 +25,7 @@ namespace CastleTests.Diagnostics
 	using CastleTests.Components;
 
 	using NUnit.Framework;
-	
+
 	public class AllComponentsDiagnosticTestCase : AbstractContainerTestCase
 	{
 		private IAllComponentsDiagnostic diagnostic;
@@ -54,9 +53,9 @@ namespace CastleTests.Diagnostics
 		{
 			var parent = new WindsorContainer();
 			parent.Register(Component.For<A>(),
-			                Component.For<B>());
+							Component.For<B>());
 			Container.Register(Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl1<>)),
-			                   Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl2<>)));
+							   Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl2<>)));
 
 			parent.AddChildContainer(Container);
 
@@ -87,7 +86,7 @@ namespace CastleTests.Diagnostics
 		public void Works_with_multi_service_components()
 		{
 			Container.Register(Component.For<IEmptyService, EmptyServiceA>()
-			                   	.ImplementedBy<EmptyServiceA>());
+								   .ImplementedBy<EmptyServiceA>());
 
 			var handlers = diagnostic.Inspect();
 
@@ -99,7 +98,7 @@ namespace CastleTests.Diagnostics
 		public void Works_with_multiple_handlers_for_given_type()
 		{
 			Container.Register(Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl1<>)),
-			                   Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl2<>)));
+							   Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl2<>)));
 
 			var handlers = diagnostic.Inspect();
 

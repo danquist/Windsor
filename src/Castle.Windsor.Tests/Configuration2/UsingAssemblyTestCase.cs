@@ -14,12 +14,13 @@
 
 #if FEATURE_WPF //This test requires PresentationCore.dll (specified in Configuration2/config_with_using_assembly.xml)
 
-namespace Castle.Windsor.Tests.Configuration2
+namespace CastleTests.Configuration2
 {
 	using System;
 
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.SubSystems.Conversion;
+	using Castle.Windsor;
 
 	using NUnit.Framework;
 

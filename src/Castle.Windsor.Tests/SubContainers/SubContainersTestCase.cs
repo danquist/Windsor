@@ -22,10 +22,9 @@ namespace CastleTests.SubContainers
 	using Castle.MicroKernel.Context;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests.Components;
 
 	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -285,7 +284,7 @@ namespace CastleTests.SubContainers
 		public void Parent_component_will_NOT_have_dependencies_from_child()
 		{
 			Kernel.Register(Component.For<DefaultTemplateEngine>(),
-			                Component.For<DefaultSpamService>());
+							Component.For<DefaultSpamService>());
 
 			var child = new DefaultKernel();
 			Kernel.AddChildKernel(child);
@@ -311,7 +310,7 @@ namespace CastleTests.SubContainers
 
 			var subkernel2 = new DefaultKernel();
 			subkernel2.Register(Component.For(typeof(DefaultTemplateEngine)).Named("templateengine")
-				                    .LifeStyle.Is(LifestyleType.Transient));
+									.LifeStyle.Is(LifestyleType.Transient));
 			Kernel.AddChildKernel(subkernel2);
 
 			var templateengine1 = subkernel1.Resolve<DefaultTemplateEngine>("templateengine");
@@ -330,7 +329,7 @@ namespace CastleTests.SubContainers
 			"Support for this was removed due to issues with scoping (SimpleComponent1 would become visible from parent container)."
 			)]
 		public void Three_level_hierarchy([Values(0, 1, 2)] int parentComponentContainer,
-		                                  [Values(0, 1, 2)] int childComponentContainer)
+										  [Values(0, 1, 2)] int childComponentContainer)
 		{
 			var subKernel = new DefaultKernel();
 			var subSubKernel = new DefaultKernel();

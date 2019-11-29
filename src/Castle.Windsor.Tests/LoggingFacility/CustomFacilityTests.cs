@@ -22,7 +22,7 @@ namespace CastleTests.LoggingFacility
 	using Castle.Windsor;
 	using Castle.Windsor.Installer;
 
-	using CastleTests.LoggingFacility.Tests.Classes;
+	using CastleTests.LoggingFacility.Classes;
 
 	using NUnit.Framework;
 

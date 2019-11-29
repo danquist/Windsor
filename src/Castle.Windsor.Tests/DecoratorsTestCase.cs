@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests
+namespace CastleTests
 {
 	using System;
 
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 
@@ -46,7 +45,7 @@ namespace Castle.MicroKernel.Tests
 				Component.For<IRepository>().ImplementedBy<DecoratedRepository2>()
 				);
 			var exception =
-				Assert.Throws<HandlerException>( () => Kernel.Resolve<IRepository>());
+				Assert.Throws<HandlerException>(() => Kernel.Resolve<IRepository>());
 
 			var expectedMessage =
 				string.Format(

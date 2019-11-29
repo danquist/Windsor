@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Lifecycle
+namespace CastleTests.Lifecycle
 {
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
 
-	using CastleTests;
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Components;
 
 	using NUnit.Framework;
 
@@ -30,8 +29,8 @@ namespace Castle.Windsor.Tests.Lifecycle
 		{
 			SimpleServiceDisposable.DisposedCount = 0;
 			Container.Register(Component.For<ISimpleService>()
-			                   	.UsingFactoryMethod(() => new SimpleServiceDisposable())
-			                   	.LifeStyle.Transient);
+								   .UsingFactoryMethod(() => new SimpleServiceDisposable())
+								   .LifeStyle.Transient);
 
 			var service = Container.Resolve<ISimpleService>();
 
@@ -46,8 +45,8 @@ namespace Castle.Windsor.Tests.Lifecycle
 		public void Disposable_component_for_nondisposable_service_is_tracked()
 		{
 			Container.Register(Component.For<ISimpleService>()
-			                   	.ImplementedBy<SimpleServiceDisposable>()
-			                   	.LifeStyle.Transient);
+								   .ImplementedBy<SimpleServiceDisposable>()
+								   .LifeStyle.Transient);
 
 			var service = Container.Resolve<ISimpleService>();
 
@@ -59,8 +58,8 @@ namespace Castle.Windsor.Tests.Lifecycle
 		{
 			SimpleServiceDisposable.DisposedCount = 0;
 			Container.Register(Component.For<ISimpleService>()
-			                   	.ImplementedBy<SimpleServiceDisposable>()
-			                   	.LifeStyle.Transient);
+								   .ImplementedBy<SimpleServiceDisposable>()
+								   .LifeStyle.Transient);
 
 			var service = Container.Resolve<ISimpleService>();
 			Container.Release(service);

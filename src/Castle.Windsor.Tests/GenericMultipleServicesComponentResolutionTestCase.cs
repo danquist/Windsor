@@ -15,11 +15,11 @@
 namespace CastleTests
 {
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
-	using Castle.Windsor.Tests.Interceptors;
 
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Components;
+	using CastleTests.Interceptors;
 	using CastleTests.TestImplementationsOfExtensionPoints;
 
 	using NUnit.Framework;

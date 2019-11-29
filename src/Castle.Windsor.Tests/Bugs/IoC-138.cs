@@ -12,12 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Bugs
+namespace CastleTests.Bugs
 {
-	using System.Collections.Generic;
-
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
+	using Castle.Windsor;
 
 	using NUnit.Framework;
 
@@ -30,7 +29,7 @@ namespace Castle.Windsor.Tests.Bugs
 			var container = new WindsorContainer();
 			ServiceLocator.Container = container;
 			container.Register(Component.For<UsesServiceLocator>().Named("A"),
-			                   Component.For<DependsOnStringTest2>().Named("B"));
+							   Component.For<DependsOnStringTest2>().Named("B"));
 
 			var component = container.Resolve<UsesServiceLocator>(
 				new Arguments { { "test", "bla" } });

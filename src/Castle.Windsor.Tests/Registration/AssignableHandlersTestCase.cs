@@ -15,7 +15,8 @@
 namespace CastleTests.Registration
 {
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 
@@ -26,7 +27,7 @@ namespace CastleTests.Registration
 		public void Ignores_generic_components_where_generic_constrants_are_violated()
 		{
 			Kernel.Register(Component.For<CustomerValidator>(),
-			                Component.For(typeof(CustomerChainValidator<>)));
+							Component.For(typeof(CustomerChainValidator<>)));
 
 			var handlers = Kernel.GetAssignableHandlers(typeof(IValidator<CustomerImpl>));
 

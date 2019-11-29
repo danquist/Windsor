@@ -16,10 +16,10 @@ namespace CastleTests.Registration
 {
 	using System.Reflection;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests.Interceptors;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -30,7 +30,7 @@ namespace CastleTests.Registration
 		public void Based_on_interface_types_registered()
 		{
 			Container.Register(Types.FromAssembly(GetCurrentAssembly())
-			                   	.BasedOn(typeof(ICommon))
+								   .BasedOn(typeof(ICommon))
 				);
 
 			var handlers = Kernel.GetHandlers(typeof(ICommon));

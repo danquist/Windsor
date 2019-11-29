@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using System;
 	using System.Linq;
@@ -25,11 +25,13 @@ namespace Castle.Windsor.Tests
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Proxy;
 	using Castle.MicroKernel.Registration;
-	using Castle.ProxyInfrastructure;
+	using Castle.Windsor;
 	using Castle.Windsor.Installer;
-	using Castle.Windsor.Tests.Interceptors;
-	using Castle.XmlFiles;
+
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
+	using CastleTests.ProxyInfrastructure;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 
@@ -70,9 +72,9 @@ namespace Castle.Windsor.Tests
 		public void Interface_that_depends_on_service_it_is_intercepting()
 		{
 			container.Register(Component.For<InterceptorThatCauseStackOverflow>(),
-			                   Component.For<ICameraService>().ImplementedBy<CameraService>().Interceptors<InterceptorThatCauseStackOverflow>(),
-			                   //because it has no interceptors, it is okay to resolve it...
-			                   Component.For<ICameraService>().ImplementedBy<CameraService>().Named("okay to resolve"));
+							   Component.For<ICameraService>().ImplementedBy<CameraService>().Interceptors<InterceptorThatCauseStackOverflow>(),
+							   //because it has no interceptors, it is okay to resolve it...
+							   Component.For<ICameraService>().ImplementedBy<CameraService>().Named("okay to resolve"));
 
 			container.Resolve<ICameraService>();
 		}
@@ -133,14 +135,14 @@ namespace Castle.Windsor.Tests
 		{
 			container.Install(XmlResource("interceptors.xml"));
 			Assert.Throws(typeof(HandlerException), () =>
-			                                        container.Resolve<CalculatorService>("ComponentWithNonExistingInterceptor"));
+													container.Resolve<CalculatorService>("ComponentWithNonExistingInterceptor"));
 		}
 
 		[Test]
 		public void Xml_Component_With_Non_invalid_Interceptor_throws()
 		{
 			Assert.Throws(typeof(Exception), () =>
-			                                 container.Install(XmlResource("interceptorsInvalid.xml")));
+											 container.Install(XmlResource("interceptorsInvalid.xml")));
 		}
 
 		[Test]
@@ -163,7 +165,7 @@ namespace Castle.Windsor.Tests
 			Assert.IsInstanceOf<ISimpleMixIn>(service);
 
 			Assert.Throws(typeof(System.NotImplementedException), () =>
-			                                                      ((ISimpleMixIn)service).DoSomething());
+																  ((ISimpleMixIn)service).DoSomething());
 		}
 
 		[Test]
@@ -206,7 +208,7 @@ namespace Castle.Windsor.Tests
 			Assert.IsNotNull(InterceptorWithOnBehalf.Model);
 			Assert.AreEqual("key", InterceptorWithOnBehalf.Model.Name);
 			Assert.AreEqual(typeof(CalculatorService),
-			                InterceptorWithOnBehalf.Model.Implementation);
+							InterceptorWithOnBehalf.Model.Implementation);
 		}
 
 		[Test]
@@ -239,7 +241,7 @@ namespace Castle.Windsor.Tests
 			container = new WindsorContainer(); // So we wont use the facilities
 
 			container.Register(Component.For<ResultModifierInterceptor>(),
-			                   Component.For<CalculatorServiceWithAttributes>());
+							   Component.For<CalculatorServiceWithAttributes>());
 
 			var service = container.Resolve<CalculatorServiceWithAttributes>();
 
@@ -305,7 +307,7 @@ namespace Castle.Windsor.Tests
 
 	public class MyInterceptorGreedyFacility : IFacility
 	{
-		public void Init(IKernel kernel, Core.Configuration.IConfiguration facilityConfig)
+		public void Init(IKernel kernel, Castle.Core.Configuration.IConfiguration facilityConfig)
 		{
 			kernel.ComponentRegistered += OnComponentRegistered;
 		}
@@ -326,7 +328,7 @@ namespace Castle.Windsor.Tests
 
 	public class MyInterceptorGreedyFacility2 : IFacility
 	{
-		public void Init(IKernel kernel, Core.Configuration.IConfiguration facilityConfig)
+		public void Init(IKernel kernel, Castle.Core.Configuration.IConfiguration facilityConfig)
 		{
 			kernel.ComponentRegistered += OnComponentRegistered;
 		}

@@ -20,10 +20,9 @@ namespace CastleTests.Installer
 	using Castle.MicroKernel.SubSystems.Configuration;
 	using Castle.Windsor;
 	using Castle.Windsor.Installer;
-	using Castle.Windsor.Tests;
-	using Castle.XmlFiles;
 
 	using CastleTests.Components;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 
@@ -98,8 +97,8 @@ namespace CastleTests.Installer
 			Container.Install(
 				Configuration.FromXml(Xml.Embedded("justConfiguration.xml")),
 				new Installer(c => c.Register(Component.For<ICamera>()
-				                              	.ImplementedBy<Camera>()
-				                              	.Named("camera"))));
+												  .ImplementedBy<Camera>()
+												  .Named("camera"))));
 
 			var camera = Container.Resolve<ICamera>();
 			Assert.AreEqual("from configuration", camera.Name);
@@ -111,8 +110,8 @@ namespace CastleTests.Installer
 		{
 			Container.Install(
 				new Installer(c => c.Register(Component.For<ICamera>()
-				                              	.ImplementedBy<Camera>()
-				                              	.Named("camera"))),
+												  .ImplementedBy<Camera>()
+												  .Named("camera"))),
 				Configuration.FromXml(Xml.Embedded("justConfiguration.xml"))
 				);
 

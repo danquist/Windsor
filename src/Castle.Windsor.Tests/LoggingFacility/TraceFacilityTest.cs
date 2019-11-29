@@ -13,16 +13,17 @@
 // limitations under the License.
 
 #if FEATURE_CONSOLETRACELISTENER   //requires System.Diagnostics.ConsoleTraceListener
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using System;
 	using System.Diagnostics;
 	using System.IO;
 
 	using Castle.Core.Logging;
-	using Castle.Facilities.Logging.Tests.Classes;
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
+
+	using CastleTests.LoggingFacility.Classes;
 
 	using NUnit.Framework;
 
@@ -65,7 +66,7 @@ namespace Castle.Facilities.Logging.Tests
 			var test = container.Resolve<SimpleLoggingComponent>("component");
 
 			var expectedLogOutput = String.Format("{0} Information: 0 : Hello world" + Environment.NewLine,
-			                                      typeof(SimpleLoggingComponent).FullName);
+												  typeof(SimpleLoggingComponent).FullName);
 
 			if (test != null)
 			{

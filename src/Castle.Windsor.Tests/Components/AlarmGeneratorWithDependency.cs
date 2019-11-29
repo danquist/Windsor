@@ -14,8 +14,6 @@
 
 namespace CastleTests.Components
 {
-	using Castle.Windsor.Tests;
-
 	public class AlarmGeneratorWithDependency
 	{
 		private readonly IAlarmSender sender;

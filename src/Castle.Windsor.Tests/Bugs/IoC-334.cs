@@ -17,7 +17,8 @@ namespace CastleTests.Bugs
 {
 	using Castle.Core.Configuration;
 	using Castle.MicroKernel;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 

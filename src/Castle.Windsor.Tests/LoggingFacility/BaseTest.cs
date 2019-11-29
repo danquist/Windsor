@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using Castle.Core.Logging;
+	using Castle.Facilities.Logging;
 	using Castle.MicroKernel.SubSystems.Configuration;
 #if CASTLE_SERVICES_LOGGING
 	using Castle.Services.Logging.Log4netIntegration;

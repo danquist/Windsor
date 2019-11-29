@@ -17,7 +17,8 @@ namespace CastleTests.Components
 {
 
 	using Castle.Core;
-	using Castle.Windsor.Tests.Interceptors;
+
+	using CastleTests.Interceptors;
 
 	[Interceptor(typeof(ChangeResultInterceptor))]
 	public class InterceptableCalcServiceRemoting : CalcServiceRemotingImpl

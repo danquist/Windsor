@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Facilities.TypedFactory.Selectors
+namespace CastleTests.Facilities.TypedFactory.Selectors
 {
-	using System.Collections;
 	using System.Reflection;
 
 	using Castle.Facilities.TypedFactory;

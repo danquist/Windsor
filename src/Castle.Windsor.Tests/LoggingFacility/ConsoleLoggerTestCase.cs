@@ -16,8 +16,9 @@ namespace CastleTests.LoggingFacility
 {
 	using Castle.Core.Logging;
 	using Castle.Facilities.Logging;
-	using Castle.Facilities.Logging.Tests.Classes;
 	using Castle.MicroKernel.Registration;
+
+	using CastleTests.LoggingFacility.Classes;
 
 	using NUnit.Framework;
 

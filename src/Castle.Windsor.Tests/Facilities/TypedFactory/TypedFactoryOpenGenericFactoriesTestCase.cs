@@ -16,9 +16,9 @@ namespace CastleTests.Facilities.TypedFactory
 {
 	using Castle.Facilities.TypedFactory;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
 
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Factories;
 
 	using NUnit.Framework;
 
@@ -33,8 +33,8 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_use_open_generic_service_as_typed_factory()
 		{
 			Container.Register(Component.For(typeof(IGenericFactory<>)).AsFactory(),
-			                   Component.For<A>(),
-			                   Component.For<B>());
+							   Component.For<A>(),
+							   Component.For<B>());
 
 			var aFactory = Container.Resolve<IGenericFactory<A>>();
 			var bFactory = Container.Resolve<IGenericFactory<B>>();

@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Bugs
+namespace CastleTests.Bugs
 {
 	using System;
 
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 
 	using NUnit.Framework;
@@ -28,10 +29,10 @@ namespace Castle.MicroKernel.Tests.Bugs
 		{
 			IKernel kernel = new DefaultKernel();
 
-		    kernel.Register(Component.For<Presenter>());
-		    kernel.Register(Component.For<View>());
+			kernel.Register(Component.For<Presenter>());
+			kernel.Register(Component.For<View>());
 
-		    try
+			try
 			{
 				Presenter p = (Presenter)kernel.Resolve(typeof(Presenter));
 				Assert.IsNotNull(p);
@@ -49,8 +50,8 @@ namespace Castle.MicroKernel.Tests.Bugs
 
 		public virtual View View
 		{
-			get { return view;  }
-			protected set { view = value;}
+			get { return view; }
+			protected set { view = value; }
 		}
 	}
 

@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using System;
 
@@ -72,7 +72,7 @@ namespace Castle.Windsor.Tests
 
 			selector.Interest = Interest.Biology;
 			Assert.IsInstanceOf(typeof(SatiWatcher), container.Resolve<Person>().Watcher,
-			                    "sub dependency should resolve sati");
+								"sub dependency should resolve sati");
 			Assert.IsInstanceOf(typeof(BirdWatcher), container.Resolve<IWatcher>(), "root dependency should resolve bird");
 		}
 
@@ -121,13 +121,13 @@ namespace Castle.Windsor.Tests
 		public class WatchSubDependencySelector : ISubDependencyResolver
 		{
 			public bool CanResolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model,
-			                       DependencyModel dependency)
+								   DependencyModel dependency)
 			{
 				return dependency.TargetType == typeof(IWatcher);
 			}
 
 			public object Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model,
-			                      DependencyModel dependency)
+								  DependencyModel dependency)
 			{
 				return new SatiWatcher();
 			}

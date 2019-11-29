@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Registration.Interceptors
+namespace CastleTests.Registration.Interceptors
 {
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.MicroKernel.Tests.Registration.Interceptors.Multiple;
-	using Castle.MicroKernel.Tests.Registration.Interceptors.Single;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
+	using CastleTests.Registration.Interceptors.Multiple;
+	using CastleTests.Registration.Interceptors.Single;
 
 	using NUnit.Framework;
 
@@ -43,7 +43,7 @@ namespace Castle.MicroKernel.Tests.Registration.Interceptors
 		private void AssertInterceptorReferencesAreEqual(IHandler handler, InterceptorsTestCaseHelper helper)
 		{
 			CollectionAssert.AreEqual(helper.GetExpectedInterceptorsInCorrectOrder(),
-			                          handler.ComponentModel.Interceptors);
+									  handler.ComponentModel.Interceptors);
 		}
 
 		[Test]

@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Lifestyle
+namespace CastleTests.Lifestyle
 {
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Handlers;
 
 	public class CustomLifestyle_Scope : IResolveExtension

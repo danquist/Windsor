@@ -13,15 +13,17 @@
 // limitations under the License.
 
 #if FEATURE_SERIALIZATION
-namespace Castle.MicroKernel.Tests
+namespace CastleTests
 {
 	using System;
 	using System.IO;
 	using System.Runtime.Serialization.Formatters.Binary;
 	using System.Security.Policy;
 
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 
@@ -60,8 +62,8 @@ namespace Castle.MicroKernel.Tests
 			try
 			{
 				var kernel = (IKernel)
-				             otherDomain.CreateInstanceAndUnwrap(
-				             	"Castle.Windsor", "Castle.MicroKernel.DefaultKernel");
+							 otherDomain.CreateInstanceAndUnwrap(
+								 "Castle.Windsor", "Castle.MicroKernel.DefaultKernel");
 
 				kernel.Register(Component.For(typeof(CustomerImpl)).Named("key"));
 				Assert.IsTrue(kernel.HasComponent("key"));
@@ -88,8 +90,8 @@ namespace Castle.MicroKernel.Tests
 			try
 			{
 				var kernel = (IKernel)
-				             otherDomain.CreateInstanceAndUnwrap(
-				             	"Castle.Windsor", "Castle.MicroKernel.DefaultKernel");
+							 otherDomain.CreateInstanceAndUnwrap(
+								 "Castle.Windsor", "Castle.MicroKernel.DefaultKernel");
 
 				kernel.Register(Component.For(typeof(CustomerImpl)).Named("key"));
 				Assert.IsTrue(kernel.HasComponent("key"));

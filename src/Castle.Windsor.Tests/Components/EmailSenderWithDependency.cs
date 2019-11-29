@@ -14,8 +14,6 @@
 
 namespace CastleTests.Components
 {
-	using Castle.Windsor.Tests;
-
 	public class EmailSenderWithDependency : IAlarmSender
 	{
 		public EmailSenderWithDependency(A dependency)

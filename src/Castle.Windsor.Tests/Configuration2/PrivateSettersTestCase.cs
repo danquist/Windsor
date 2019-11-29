@@ -12,10 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Configuration2
+namespace CastleTests.Configuration2
 {
-	using Config = Castle.Windsor.Installer.Configuration;
+	using Castle.Windsor;
+
 	using NUnit.Framework;
+
+	using Config = Castle.Windsor.Installer.Configuration;
 
 	[TestFixture(Description = "Based on http://theburningmonk.com/2010/08/castle-windsor-tips-say-no-to-private-setter/")]
 	public class PrivateSettersTestCase

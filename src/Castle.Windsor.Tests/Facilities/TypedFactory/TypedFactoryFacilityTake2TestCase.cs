@@ -21,12 +21,10 @@ namespace CastleTests.Facilities.TypedFactory
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Releasers;
-	using Castle.Windsor.Tests.ClassComponents;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Selectors;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Components;
 	using CastleTests.Facilities.TypedFactory.Factories;
 	using CastleTests.Facilities.TypedFactory.Selectors;
 	using CastleTests.Interceptors;
@@ -46,10 +44,10 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_Resolve_by_closed_generic_closed_on_arguments_type_with_custom_selector()
 		{
 			Container.Register(Classes.FromAssemblyContaining<TypedFactoryFacilityTake2TestCase>()
-				                   .BasedOn(typeof(GenericComponent<>))
-				                   .WithService.Base().Configure(c => c.LifestyleTransient()),
-			                   Component.For<IObjectFactory>().AsFactory(s => s.SelectedWith<SelectorByClosedArgumentType>()),
-			                   Component.For<SelectorByClosedArgumentType>());
+								   .BasedOn(typeof(GenericComponent<>))
+								   .WithService.Base().Configure(c => c.LifestyleTransient()),
+							   Component.For<IObjectFactory>().AsFactory(s => s.SelectedWith<SelectorByClosedArgumentType>()),
+							   Component.For<SelectorByClosedArgumentType>());
 
 			var factory = Container.Resolve<IObjectFactory>();
 
@@ -262,7 +260,7 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_resolve_via_generic_factory_inherited_semi_closing()
 		{
 			Container.Register(Component.For(typeof(IGenericFactoryDouble<,>)).AsFactory(),
-			                   Component.For<IProtocolHandler>().ImplementedBy<MirandaProtocolHandler>().LifeStyle.Transient);
+							   Component.For<IProtocolHandler>().ImplementedBy<MirandaProtocolHandler>().LifeStyle.Transient);
 
 			var factory = Container.Resolve<IGenericFactoryDouble<IDummyComponent, IProtocolHandler>>();
 
@@ -724,9 +722,9 @@ namespace CastleTests.Facilities.TypedFactory
 		[Test]
 		public void Typed_factory_obeys_release_policy_non_tracking()
 		{
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
 			Container.Kernel.ReleasePolicy = new NoTrackingReleasePolicy();
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
 			Container.Register(
 				Component.For<INonDisposableFactory>().LifeStyle.Transient.AsFactory(),
 				Component.For<DisposableComponent>().LifeStyle.Transient);

@@ -12,16 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests
+namespace CastleTests
 {
 	using System;
 
 	using Castle.Core.Configuration;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 
@@ -128,7 +127,7 @@ namespace Castle.MicroKernel.Tests
 
 			var exception =
 				Assert.Throws<HandlerException>(() =>
-				                                Kernel.Resolve<CustomerImpl2>("key"));
+												Kernel.Resolve<CustomerImpl2>("key"));
 			var expectedMessage =
 				string.Format(
 					"Can't create component 'key' as it has dependencies to be satisfied.{0}{0}'key' is waiting for the following dependencies:{0}- Parameter 'name' which was not provided. Did you forget to set the dependency?{0}- Parameter 'address' which was not provided. Did you forget to set the dependency?{0}- Parameter 'age' which was not provided. Did you forget to set the dependency?{0}",

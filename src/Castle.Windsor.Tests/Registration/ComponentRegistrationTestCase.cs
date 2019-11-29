@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Registration
+namespace CastleTests.Registration
 {
 	using System;
 	using System.Collections.Generic;
@@ -22,15 +22,15 @@ namespace Castle.MicroKernel.Tests.Registration
 	using Castle.Core.Configuration;
 	using Castle.DynamicProxy;
 	using Castle.Facilities.Startable;
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Proxy;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.MicroKernel.Tests.Configuration.Components;
-	using Castle.Windsor.Tests.Facilities.Startable.Components;
-	using Castle.Windsor.Tests.Interceptors;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Config.Components;
+	using CastleTests.Facilities.Startable.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -67,7 +67,7 @@ namespace Castle.MicroKernel.Tests.Registration
 		{
 			var selector = new InterceptorTypeSelector(typeof(TestInterceptor1));
 			Kernel.Register(Component.For<ICustomer>().Interceptors(new InterceptorReference(typeof(TestInterceptor1)))
-			                	.SelectedWith(selector).Anywhere);
+								.SelectedWith(selector).Anywhere);
 
 			var handler = Kernel.GetHandler(typeof(ICustomer));
 
@@ -384,8 +384,8 @@ namespace Castle.MicroKernel.Tests.Registration
 				Component.For<ICustomer>()
 					.ImplementedBy<CustomerImpl>()
 					.DependsOn(Property.ForKey("Name").Eq("Caption Hook"),
-					           Property.ForKey("Address").Eq("Fairyland"),
-					           Property.ForKey("Age").Eq(45)));
+							   Property.ForKey("Address").Eq("Fairyland"),
+							   Property.ForKey("Age").Eq(45)));
 
 			var customer = Kernel.Resolve<ICustomer>();
 			Assert.AreEqual(customer.Name, "Caption Hook");
@@ -502,8 +502,8 @@ namespace Castle.MicroKernel.Tests.Registration
 		public void AddGenericComponent_WithParameters()
 		{
 			Kernel.Register(Component.For(typeof(IGenericClassWithParameter<>))
-			                	.ImplementedBy(typeof(GenericClassWithParameter<>))
-			                	.DependsOn(Parameter.ForKey("name").Eq("NewName"))
+								.ImplementedBy(typeof(GenericClassWithParameter<>))
+								.DependsOn(Parameter.ForKey("name").Eq("NewName"))
 				);
 
 			var instance = Kernel.Resolve<IGenericClassWithParameter<int>>();
@@ -531,8 +531,8 @@ namespace Castle.MicroKernel.Tests.Registration
 		{
 			Kernel.AddFacility<StartableFacility>()
 				.Register(Component.For<NoInterfaceStartableComponent>()
-				          	.StartUsingMethod("Start")
-				          	.StopUsingMethod("Stop")
+							  .StartUsingMethod("Start")
+							  .StopUsingMethod("Stop")
 				);
 
 			var component = Kernel.Resolve<NoInterfaceStartableComponent>();
@@ -550,8 +550,8 @@ namespace Castle.MicroKernel.Tests.Registration
 		{
 			Kernel.AddFacility<StartableFacility>()
 				.Register(Component.For<NoInterfaceStartableComponent>()
-				          	.StartUsingMethod(x => x.Start)
-				          	.StopUsingMethod(x => x.Stop)
+							  .StartUsingMethod(x => x.Start)
+							  .StopUsingMethod(x => x.Stop)
 				);
 
 			var component = Kernel.Resolve<NoInterfaceStartableComponent>();

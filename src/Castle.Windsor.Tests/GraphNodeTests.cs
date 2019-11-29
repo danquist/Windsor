@@ -12,26 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Core.Tests
+namespace CastleTests
 {
 	using System;
 
-	using NUnit.Framework;
-
 	using Castle.Core.Internal;
 
+	using NUnit.Framework;
+
 	[TestFixture]
-	public class GraphTestCase
+	public class GraphNodeTestCase
 	{
 		[Test]
 		public void SimpleUsage()
 		{
 			GraphNode parent = new GraphNode();
 			GraphNode child = new GraphNode();
-			
+
 			parent.AddDependent(child);
 
-			Assert.AreSame( child, parent.Dependents[0] );
+			Assert.AreSame(child, parent.Dependents[0]);
 		}
 
 		[Test]
@@ -39,9 +39,9 @@ namespace Castle.Core.Tests
 		{
 			GraphNode alone = new TestGraphNode("alone");
 
-			IVertex[] nodes = TopologicalSortAlgo.Sort( new[] { alone } );
+			IVertex[] nodes = TopologicalSortAlgo.Sort(new[] { alone });
 
-			Assert.AreSame( alone, nodes[0] );
+			Assert.AreSame(alone, nodes[0]);
 		}
 
 		[Test]
@@ -51,17 +51,17 @@ namespace Castle.Core.Tests
 			GraphNode first = new TestGraphNode("first");
 			GraphNode second = new TestGraphNode("second");
 			GraphNode third = new TestGraphNode("third");
-			
+
 			first.AddDependent(second);
 			second.AddDependent(third);
 
-			IVertex[] nodes = 
-				TopologicalSortAlgo.Sort( new GraphNode[] { alone, second, first, third } );
+			IVertex[] nodes =
+				TopologicalSortAlgo.Sort(new GraphNode[] { alone, second, first, third });
 
-			Assert.AreSame( first, nodes[0] );
-			Assert.AreSame( second, nodes[1] );
-			Assert.AreSame( third, nodes[2] );
-			Assert.AreSame( alone, nodes[3] );
+			Assert.AreSame(first, nodes[0]);
+			Assert.AreSame(second, nodes[1]);
+			Assert.AreSame(third, nodes[2]);
+			Assert.AreSame(alone, nodes[3]);
 		}
 
 		[Test]
@@ -76,7 +76,7 @@ namespace Castle.Core.Tests
 			GraphNode pants = new TestGraphNode("pants");
 			GraphNode shoes = new TestGraphNode("shoes");
 			GraphNode socks = new TestGraphNode("socks");
-			
+
 			shirt.AddDependent(belt);
 			shirt.AddDependent(tie);
 
@@ -91,20 +91,20 @@ namespace Castle.Core.Tests
 			socks.AddDependent(shoes);
 			belt.AddDependent(jacket);
 
-			IVertex[] nodes = 
-				TopologicalSortAlgo.Sort( 
-					new GraphNode[] 
-					{ shirt, tie, jacket, belt, watch, undershorts, pants, shoes, socks} );
+			IVertex[] nodes =
+				TopologicalSortAlgo.Sort(
+					new GraphNode[]
+					{ shirt, tie, jacket, belt, watch, undershorts, pants, shoes, socks});
 
-			Assert.AreSame( socks, nodes[0] );
-			Assert.AreSame( undershorts, nodes[1] );
-			Assert.AreSame( pants, nodes[2] );
-			Assert.AreSame( shoes, nodes[3] );
-			Assert.AreSame( watch, nodes[4] );
-			Assert.AreSame( shirt, nodes[5] );
-			Assert.AreSame( tie, nodes[6] );
-			Assert.AreSame( belt, nodes[7] );
-			Assert.AreSame( jacket, nodes[8] );
+			Assert.AreSame(socks, nodes[0]);
+			Assert.AreSame(undershorts, nodes[1]);
+			Assert.AreSame(pants, nodes[2]);
+			Assert.AreSame(shoes, nodes[3]);
+			Assert.AreSame(watch, nodes[4]);
+			Assert.AreSame(shirt, nodes[5]);
+			Assert.AreSame(tie, nodes[6]);
+			Assert.AreSame(belt, nodes[7]);
+			Assert.AreSame(jacket, nodes[8]);
 		}
 	}
 

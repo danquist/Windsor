@@ -19,10 +19,9 @@ namespace CastleTests.Registration
 
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests.ClassComponents;
 
 	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -87,8 +86,8 @@ namespace CastleTests.Registration
 		public void Can_cumulate_services()
 		{
 			Kernel.Register(Classes.FromAssembly(GetCurrentAssembly()).Where(t => t == typeof(TwoInterfacesImpl))
-			                	.WithService.AllInterfaces()
-			                	.WithService.Self());
+								.WithService.AllInterfaces()
+								.WithService.Self());
 			var services = Kernel.GetAssignableHandlers(typeof(object)).Single().ComponentModel.Services.ToArray();
 			Assert.AreEqual(3, services.Length);
 			Assert.True(services.Any(s => s == typeof(ICommon)));
@@ -100,8 +99,8 @@ namespace CastleTests.Registration
 		public void Can_cumulate_services_without_duplication()
 		{
 			Kernel.Register(Classes.FromAssembly(GetCurrentAssembly()).Where(t => t == typeof(TwoInterfacesImpl))
-			                	.WithService.AllInterfaces()
-			                	.WithService.FirstInterface());
+								.WithService.AllInterfaces()
+								.WithService.FirstInterface());
 			var handlers = Kernel.GetAssignableHandlers(typeof(object));
 			Assert.AreEqual(1, handlers.Length);
 			var handler = handlers.Single();

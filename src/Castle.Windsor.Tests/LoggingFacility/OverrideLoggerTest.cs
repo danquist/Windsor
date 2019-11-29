@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using Castle.Core.Logging;
+	using Castle.Facilities.Logging;
 	using Castle.MicroKernel.SubSystems.Configuration;
 	using Castle.Windsor;
 

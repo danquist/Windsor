@@ -14,8 +14,6 @@
 
 namespace CastleTests.ClassComponents
 {
-	using Castle.MicroKernel.Tests.ClassComponents;
-
 	public class GenericWithTDependency<T> : IGeneric<T>
 	{
 		public GenericWithTDependency(T dependency)

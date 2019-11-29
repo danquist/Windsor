@@ -21,8 +21,6 @@ namespace CastleTests.Registration
 
 	using NUnit.Framework;
 
-	using RootNamespace;
-
 	[TestFixture]
 	public class ComponentRegistrationByNamespaceTestCase : AbstractContainerTestCase
 	{
@@ -115,24 +113,15 @@ namespace CastleTests.Registration
 			Assert.AreEqual(2, ComponentsCount());
 		}
 	}
-}
 
-namespace RootNamespace
-{
 	public class RootComponent
 	{
 	}
-}
 
-namespace RootNamespaceEx
-{
 	public class RootComponentEx
 	{
 	}
-}
 
-namespace RootNamespace.Sub
-{
 	public class SubComponent
 	{
 	}

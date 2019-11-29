@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests
+namespace CastleTests
 {
 	using System;
-	using System.Collections;
 	using System.Linq;
 	using System.Reflection;
 	using System.Threading;
 
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers;
-	using CastleTests;
+
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -43,7 +43,7 @@ namespace Castle.MicroKernel.Tests
 		public void Can_lazily_resolve_dependency()
 		{
 			Container.Register(Component.For<ILazyComponentLoader>().ImplementedBy<LoaderForDefaultImplementations>(),
-			                   Component.For<UsingLazyComponent>());
+							   Component.For<UsingLazyComponent>());
 			var component = Container.Resolve<UsingLazyComponent>();
 			Assert.IsNotNull(component.Dependency);
 		}
@@ -105,7 +105,7 @@ namespace Castle.MicroKernel.Tests
 		{
 			var loader = new ABLoaderWithGuardClause();
 			Container.Register(Component.For<ILazyComponentLoader>().Instance(loader),
-			                   Component.For<B>());
+							   Component.For<B>());
 
 			loader.CanLoadNow = true;
 
@@ -118,7 +118,7 @@ namespace Castle.MicroKernel.Tests
 			Container.Register(Component.For<LoaderWithDependency>());
 
 			Assert.Throws<ComponentNotFoundException>(() =>
-			                                          Container.Resolve<ISpecification>("some not registered service"));
+													  Container.Resolve<ISpecification>("some not registered service"));
 		}
 	}
 

@@ -15,7 +15,8 @@
 namespace CastleTests.Facilities.TypedFactory.Factories
 {
 	using Castle.Facilities.TypedFactory;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Selectors;
+
+	using CastleTests.Facilities.TypedFactory.Selectors;
 
 	[Factory(SelectorComponentType = typeof(Component2Selector))]
 	public interface IDummyComponentFactoryWithAttribute_serviceType : IDummyComponentFactory

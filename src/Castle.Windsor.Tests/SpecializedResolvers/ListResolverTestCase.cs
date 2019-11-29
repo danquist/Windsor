@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.SpecializedResolvers
+namespace CastleTests.SpecializedResolvers
 {
 	using System.Linq;
 
@@ -20,11 +20,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 	using Castle.Windsor;
-	using Castle.Windsor.Tests;
 
-	using CastleTests;
 	using CastleTests.Components;
-	using CastleTests.SpecializedResolvers;
 
 	using NUnit.Framework;
 
@@ -70,8 +67,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnListOfServices_OnConstructor()
 		{
 			Kernel.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                Component.For<ListDepAsConstructor>());
+							Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							Component.For<ListDepAsConstructor>());
 
 			var comp = Kernel.Resolve<ListDepAsConstructor>();
 
@@ -88,8 +85,8 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		public void DependencyOnListOfServices_OnProperty()
 		{
 			Kernel.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>(),
-			                Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
-			                Component.For<ListDepAsProperty>());
+							Component.For<IEmptyService>().ImplementedBy<EmptyServiceB>(),
+							Component.For<ListDepAsProperty>());
 
 			var comp = Kernel.Resolve<ListDepAsProperty>();
 
@@ -107,7 +104,7 @@ namespace Castle.MicroKernel.Tests.SpecializedResolvers
 		{
 			Kernel.Resolver.AddSubResolver(new ListResolver(Kernel, true));
 			Kernel.Register(Component.For<ListDepAsConstructor>(),
-			                Component.For<ListDepAsProperty>());
+							Component.For<ListDepAsProperty>());
 
 			var proxy = Kernel.Resolve<ListDepAsConstructor>();
 			Assert.IsNotNull(proxy.Services);

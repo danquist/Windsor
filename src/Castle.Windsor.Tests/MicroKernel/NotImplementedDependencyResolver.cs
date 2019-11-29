@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.MicroKernel
+namespace CastleTests.MicroKernel
 {
 	using System;
 
@@ -40,13 +40,13 @@ namespace Castle.Windsor.Tests.MicroKernel
 		}
 
 		public bool CanResolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model,
-		                       DependencyModel dependency)
+							   DependencyModel dependency)
 		{
 			throw new NotImplementedException();
 		}
 
 		public object Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model,
-		                      DependencyModel dependency)
+							  DependencyModel dependency)
 		{
 			throw new NotImplementedException();
 		}

@@ -21,12 +21,11 @@ namespace CastleTests
 	using Castle.MicroKernel.ComponentActivator;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.Bugs;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.MicroKernel.Tests.Configuration.Components;
 
+	using CastleTests.Bugs;
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Config.Components;
 
 	using NUnit.Framework;
 
@@ -56,7 +55,7 @@ namespace CastleTests
 		public void No_resolvable_constructor_open_generic_component()
 		{
 			Container.Register(Component.For(typeof(IoC_141.IProcessor<>)).ImplementedBy(typeof(IoC_141.DefaultProcessor<>)).Named("processor"),
-			                   Component.For<IoC_141.IAssembler<object>>().ImplementedBy<IoC_141.ObjectAssembler>());
+							   Component.For<IoC_141.IAssembler<object>>().ImplementedBy<IoC_141.ObjectAssembler>());
 
 			var exception = Assert.Throws<HandlerException>(() => Container.Resolve<IoC_141.IProcessor<int>>());
 
@@ -93,8 +92,8 @@ namespace CastleTests
 		{
 			var a = new ADisposable();
 			Container.Register(Component.For<A>()
-			                            .LifestyleTransient()
-			                            .UsingFactoryMethod(() => a));
+										.LifestyleTransient()
+										.UsingFactoryMethod(() => a));
 
 			//so we track the instance
 			Container.Resolve<A>();
@@ -116,11 +115,11 @@ namespace CastleTests
 		public void Resolving_by_name_not_found_prints_helpful_message_many_other_options_present()
 		{
 			Container.Register(Component.For<A>(),
-			                   Component.For<A>().Named("something"));
+							   Component.For<A>().Named("something"));
 
 			var exception =
 				Assert.Throws<ComponentNotFoundException>(() =>
-				                                          Container.Resolve<A>("Stefan-Mucha"));
+														  Container.Resolve<A>("Stefan-Mucha"));
 
 			var expected =
 				string.Format(
@@ -138,7 +137,7 @@ namespace CastleTests
 
 			var exception =
 				Assert.Throws<ComponentNotFoundException>(() =>
-				                                          Container.Resolve<A>("Stefan-Mucha"));
+														  Container.Resolve<A>("Stefan-Mucha"));
 
 			var expected =
 				string.Format(
@@ -154,7 +153,7 @@ namespace CastleTests
 		{
 			var exception =
 				Assert.Throws<ComponentNotFoundException>(() =>
-				                                          Container.Resolve<A>("Stefan-Mucha"));
+														  Container.Resolve<A>("Stefan-Mucha"));
 
 			var expected =
 				string.Format(
@@ -170,10 +169,10 @@ namespace CastleTests
 		public void When_attemting_to_resolve_component_with_internal_ctor_should_throw_meaningfull_exception()
 		{
 			Container.Register(Component.For<EmptyClass>(),
-			                   Component.For<HasInternalConstructor>());
+							   Component.For<HasInternalConstructor>());
 
 			Exception exception = Assert.Throws<ComponentActivatorException>(() =>
-			                                                           Container.Resolve<HasInternalConstructor>());
+																	   Container.Resolve<HasInternalConstructor>());
 			var message =
 #if !FEATURE_REMOTING
 				string.Format("Type {0} does not have a public default constructor and could not be instantiated.",
@@ -225,11 +224,11 @@ namespace CastleTests
 			var exception = Assert.Throws<ComponentActivatorException>(() => Container.Resolve<PropertySetterThrows>());
 
 			var message = string.Format("Error setting property PropertySetterThrows.CommonService in component {1}. See inner exception for more information.{0}" +
-			                            "If you don't want Windsor to set this property you can do it by either decorating it with {2} or via registration API.{0}" +
-			                            "Alternatively consider making the setter non-public.",
-			                            Environment.NewLine,
-			                            typeof(PropertySetterThrows),
-			                            typeof(DoNotWireAttribute).Name);
+										"If you don't want Windsor to set this property you can do it by either decorating it with {2} or via registration API.{0}" +
+										"Alternatively consider making the setter non-public.",
+										Environment.NewLine,
+										typeof(PropertySetterThrows),
+										typeof(DoNotWireAttribute).Name);
 
 			Assert.AreEqual(message, exception.Message);
 		}

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 #if FEATURE_REMOTING
 	using System.Runtime.Remoting;
@@ -20,9 +20,10 @@ namespace Castle.Windsor.Tests
 
 	using Castle.DynamicProxy;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Interceptors;
+	using Castle.Windsor;
 
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 

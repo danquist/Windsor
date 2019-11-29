@@ -20,7 +20,8 @@ namespace CastleTests
 	using Castle.Core;
 	using Castle.Core.Configuration;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 

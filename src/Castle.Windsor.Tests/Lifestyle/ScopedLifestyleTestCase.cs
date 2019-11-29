@@ -21,8 +21,8 @@ namespace CastleTests.Lifestyle
 	using Castle.MicroKernel.Lifestyle.Scoped;
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
-	using Castle.Windsor.Tests.ClassComponents;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -37,7 +37,7 @@ namespace CastleTests.Lifestyle
 			var handler = Kernel.GetHandler(typeof(ScopedComponent));
 			Assert.AreEqual(LifestyleType.Scoped, handler.ComponentModel.LifestyleType);
 		}
-		
+
 		[Test]
 		public void Can_create_scope_without_using_container_or_kernel()
 		{
@@ -89,7 +89,7 @@ namespace CastleTests.Lifestyle
 			Container.Register(Component.For<A>().LifeStyle.Scoped());
 
 			var exception = Assert.Throws<InvalidOperationException>(() =>
-			                                                         Container.Resolve<A>());
+																	 Container.Resolve<A>());
 
 			Assert.AreEqual(
 				"Scope was not available. Did you forget to call container.BeginScope()?",
@@ -180,7 +180,7 @@ namespace CastleTests.Lifestyle
 		public void Transient_depending_on_scoped_component_is_not_tracked_by_the_container()
 		{
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Scoped(),
-			                   Component.For<UsesDisposableFoo>().LifeStyle.Transient);
+							   Component.For<UsesDisposableFoo>().LifeStyle.Transient);
 
 			using (Container.BeginScope())
 			{
@@ -194,7 +194,7 @@ namespace CastleTests.Lifestyle
 		public void Transient_depending_on_scoped_component_is_not_tracked_by_the_release_policy()
 		{
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Scoped(),
-			                   Component.For<UsesDisposableFoo>().LifeStyle.Transient);
+							   Component.For<UsesDisposableFoo>().LifeStyle.Transient);
 
 			using (Container.BeginScope())
 			{
@@ -236,14 +236,14 @@ namespace CastleTests.Lifestyle
 		{
 			DisposableFoo.ResetDisposedCount();
 			Container.Register(Component.For<IWindsorContainer>().LifeStyle.Scoped()
-			                   	.UsingFactoryMethod(k =>
-			                   	{
-			                   		var container = new WindsorContainer();
-			                   		container.Register(Component.For<DisposableFoo>().LifestyleScoped());
+								   .UsingFactoryMethod(k =>
+								   {
+									   var container = new WindsorContainer();
+									   container.Register(Component.For<DisposableFoo>().LifestyleScoped());
 
-			                   		k.AddChildKernel(container.Kernel);
-			                   		return container;
-			                   	}));
+									   k.AddChildKernel(container.Kernel);
+									   return container;
+								   }));
 			using (Container.BeginScope())
 			{
 				var child = Container.Resolve<IWindsorContainer>();

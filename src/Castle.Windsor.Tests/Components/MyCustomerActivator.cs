@@ -18,7 +18,8 @@ namespace CastleTests.Components
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.ComponentActivator;
 	using Castle.MicroKernel.Context;
-	using Castle.MicroKernel.Tests.ClassComponents;
+
+	using CastleTests.ClassComponents;
 
 	/// <summary>
 	/// Summary description for MyCustomerActivator.

@@ -14,7 +14,7 @@
 
 
 #if CASTLE_SERVICES_LOGGING
-namespace CastleTests.LoggingFacility.Tests.Classes
+namespace CastleTests.LoggingFacility.Classes
 {
 	using System;
 

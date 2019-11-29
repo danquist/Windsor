@@ -21,10 +21,12 @@ namespace CastleTests
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers;
-	using Castle.MicroKernel.Tests.ClassComponents;
 	using Castle.Windsor.Proxy;
-	using Castle.Windsor.Tests.MicroKernel;
+
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.MicroKernel;
+
 	using NUnit.Framework;
 
 	[TestFixture]
@@ -202,8 +204,8 @@ namespace CastleTests
 		public void ResolveAll_resolves_when_dependency_provideded_dynamically()
 		{
 			Kernel.Register(Component.For<ICommon>()
-			                	.ImplementedBy<CommonImplWithDependency>()
-			                	.DynamicParameters((k, d) => d.AddTyped(typeof(ICustomer), new CustomerImpl()))
+								.ImplementedBy<CommonImplWithDependency>()
+								.DynamicParameters((k, d) => d.AddTyped(typeof(ICustomer), new CustomerImpl()))
 				);
 
 			var services = Kernel.ResolveAll<ICommon>();
@@ -288,7 +290,7 @@ namespace CastleTests
 					Environment.NewLine);
 			var exception =
 				Assert.Throws(typeof(ComponentRegistrationException), () =>
-				                                                      Kernel.Resolve<ICommon>("abstract"));
+																	  Kernel.Resolve<ICommon>("abstract"));
 			Assert.AreEqual(expectedMessage, exception.Message);
 		}
 

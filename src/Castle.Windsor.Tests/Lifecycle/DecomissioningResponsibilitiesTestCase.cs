@@ -17,10 +17,10 @@ namespace CastleTests.Lifecycle
 	using System;
 
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.MicroKernel.Tests.Pools;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Pools;
 
 	using NUnit.Framework;
 
@@ -98,7 +98,7 @@ namespace CastleTests.Lifecycle
 			}
 
 			public DisposableSpamService(DisposableTemplateEngine templateEngine,
-			                             PoolableComponent1 pool)
+										 PoolableComponent1 pool)
 			{
 				this.templateEngine = templateEngine;
 				this.pool = pool;
@@ -258,11 +258,11 @@ namespace CastleTests.Lifecycle
 		public void Expected_exception_during_creation_doesnt_prevent_from_being_released_properly()
 		{
 			Container.Register(Component.For<GenA<int>>().LifestyleTransient(),
-			                   Component.For<B>().UsingFactoryMethod<B>(delegate
-			                   {
-			                   	throw new NotImplementedException("boo hoo!");
-			                   }).LifestyleTransient()
-			                   	.OnDestroy(Assert.IsNotNull));
+							   Component.For<B>().UsingFactoryMethod<B>(delegate
+							   {
+								   throw new NotImplementedException("boo hoo!");
+							   }).LifestyleTransient()
+								   .OnDestroy(Assert.IsNotNull));
 
 			var a = Container.Resolve<GenA<int>>();
 

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests.Windsor.Tests
 {
 	using System.Linq;
 
@@ -20,14 +20,13 @@ namespace Castle.Windsor.Tests
 	using Castle.Facilities.Startable;
 	using Castle.MicroKernel.Lifestyle;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 	using Castle.Windsor.Configuration.Interpreters;
 	using Castle.Windsor.Installer;
-	using Castle.XmlFiles;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 	using CastleTests.Generics;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 

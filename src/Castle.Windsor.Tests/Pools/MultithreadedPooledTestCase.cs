@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Pools
+namespace CastleTests.Pools
 {
 	using System.Threading;
 
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 
 	using NUnit.Framework;
@@ -37,7 +38,7 @@ namespace Castle.MicroKernel.Tests.Pools
 
 				Assert.IsNotNull(instance);
 
-				Thread.Sleep(1*500);
+				Thread.Sleep(1 * 500);
 
 				kernel.ReleaseComponent(instance);
 			}
@@ -61,7 +62,7 @@ namespace Castle.MicroKernel.Tests.Pools
 
 			startEvent.Set();
 
-			Thread.CurrentThread.Join(3*1000);
+			Thread.CurrentThread.Join(3 * 1000);
 
 			stopEvent.Set();
 		}

@@ -19,7 +19,6 @@ namespace CastleTests.Facilities.Startable
 	using Castle.Facilities.Startable;
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
-	using Castle.Windsor.Tests;
 
 	using CastleTests.Components;
 
@@ -51,8 +50,8 @@ namespace CastleTests.Facilities.Startable
 				Assert.Throws<NotImplementedException>(
 					() =>
 					container.Install(new ActionBasedInstaller(c => c.Register(Component.For<UsesIEmptyService>().Start())),
-					                  new ActionBasedInstaller(c => { throw new NotImplementedException(); }),
-					                  new ActionBasedInstaller(c => c.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>()))));
+									  new ActionBasedInstaller(c => { throw new NotImplementedException(); }),
+									  new ActionBasedInstaller(c => c.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>()))));
 			}
 		}
 
@@ -67,8 +66,8 @@ namespace CastleTests.Facilities.Startable
 				Assert.Throws<NotImplementedException>(
 					() =>
 					container.Install(new ActionBasedInstaller(c => c.Register(Component.For<UsesIEmptyService>().Start())),
-					                  new ActionBasedInstaller(c => c.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>())),
-					                  new ActionBasedInstaller(c => { throw new NotImplementedException(); })));
+									  new ActionBasedInstaller(c => c.Register(Component.For<IEmptyService>().ImplementedBy<EmptyServiceA>())),
+									  new ActionBasedInstaller(c => { throw new NotImplementedException(); })));
 
 				// In this scenario, I've registered IDependencyOfStartableComponent
 				// before the ExceptionThrowingInstaller gets a chance to gum up the works

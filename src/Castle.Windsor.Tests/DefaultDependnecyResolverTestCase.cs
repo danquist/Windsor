@@ -17,7 +17,6 @@ namespace CastleTests
 	using Castle.Core.Configuration;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
 	using CastleTests.ClassComponents;
 
@@ -66,15 +65,15 @@ namespace CastleTests
 		public void DependencyChain_registered_all_at_once()
 		{
 			Kernel.Register(Component.For<ICustomer>().ImplementedBy<CustomerChain9>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain8>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain7>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain6>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain5>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain4>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain3>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain2>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerChain1>(),
-			                Component.For<ICustomer>().ImplementedBy<CustomerImpl>());
+							Component.For<ICustomer>().ImplementedBy<CustomerChain8>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain7>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain6>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain5>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain4>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain3>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain2>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerChain1>(),
+							Component.For<ICustomer>().ImplementedBy<CustomerImpl>());
 
 			var customer = (CustomerChain1)Kernel.Resolve<ICustomer>();
 			Assert.IsInstanceOf(typeof(CustomerChain9), customer);
@@ -102,9 +101,9 @@ namespace CastleTests
 		public void FactoryPattern()
 		{
 			Kernel.Register(Component.For<DefaultSpamServiceWithConstructor>().Named("spamservice"),
-			                Component.For<DefaultMailSenderService>().Named("mailsender"),
-			                Component.For<DefaultTemplateEngine>().Named("templateengine"),
-			                Component.For<ComponentFactory>().Named("factory"));
+							Component.For<DefaultMailSenderService>().Named("mailsender"),
+							Component.For<DefaultTemplateEngine>().Named("templateengine"),
+							Component.For<ComponentFactory>().Named("factory"));
 
 			var factory = Kernel.Resolve<ComponentFactory>("factory");
 
@@ -122,8 +121,8 @@ namespace CastleTests
 		public void ResolvingConcreteClassThroughConstructor()
 		{
 			Kernel.Register(Component.For<DefaultSpamServiceWithConstructor>(),
-			                Component.For<DefaultMailSenderService>(),
-			                Component.For<DefaultTemplateEngine>());
+							Component.For<DefaultMailSenderService>(),
+							Component.For<DefaultTemplateEngine>());
 
 			var spamservice = Kernel.Resolve<DefaultSpamServiceWithConstructor>();
 
@@ -136,8 +135,8 @@ namespace CastleTests
 		public void ResolvingConcreteClassThroughProperties()
 		{
 			Kernel.Register(Component.For<DefaultSpamService>(),
-			                Component.For<DefaultMailSenderService>(),
-			                Component.For<DefaultTemplateEngine>());
+							Component.For<DefaultMailSenderService>(),
+							Component.For<DefaultTemplateEngine>());
 
 			var spamservice = Kernel.Resolve<DefaultSpamService>();
 
@@ -190,7 +189,7 @@ namespace CastleTests
 			Kernel.Register(Component.For<DefaultSpamServiceWithConstructor>().Named("spamService"));
 			Kernel.Register(Component.For<DefaultMailSenderService>().Named("someMailSender"));
 			Kernel.Register(Component.For<DefaultTemplateEngine>().Named("templateEngine")
-			                	.DependsOn(ServiceOverride.ForKey("mailSENDER").Eq("SOMEmailSenDeR")));
+								.DependsOn(ServiceOverride.ForKey("mailSENDER").Eq("SOMEmailSenDeR")));
 
 			var spamservice = Kernel.Resolve<DefaultSpamServiceWithConstructor>("spamSERVICE");
 
@@ -203,7 +202,7 @@ namespace CastleTests
 		public void UnresolvedDependencies()
 		{
 			Kernel.Register(Component.For<DefaultSpamServiceWithConstructor>(),
-			                Component.For<DefaultTemplateEngine>());
+							Component.For<DefaultTemplateEngine>());
 
 			Assert.Throws<HandlerException>(() => Kernel.Resolve<DefaultSpamServiceWithConstructor>());
 		}

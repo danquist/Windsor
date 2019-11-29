@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Releasers;
-	using Castle.Windsor.Tests.ClassComponents;
+	using Castle.Windsor;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -60,7 +60,7 @@ namespace Castle.Windsor.Tests
 		public void Doesnt_track_simple_components_with_simple_dependencies()
 		{
 			container.Register(Transient<B>(),
-			                   Transient<A>());
+							   Transient<A>());
 
 			var b = container.Resolve<B>();
 
@@ -71,7 +71,7 @@ namespace Castle.Windsor.Tests
 		public void Doesnt_track_simple_components_with_simple_dependencies_having_simple_DynamicDependencies()
 		{
 			container.Register(Transient<B>(),
-			                   Transient<A>().DynamicParameters(delegate { }));
+							   Transient<A>().DynamicParameters(delegate { }));
 
 			var b = container.Resolve<B>();
 
@@ -159,7 +159,7 @@ namespace Castle.Windsor.Tests
 		public void Tracks_simple_components_with_disposable_dependencies()
 		{
 			container.Register(Transient<DisposableFoo>(),
-			                   Transient<UsesDisposableFoo>());
+							   Transient<UsesDisposableFoo>());
 
 			var hasFoo = container.Resolve<UsesDisposableFoo>();
 
@@ -170,7 +170,7 @@ namespace Castle.Windsor.Tests
 		public void Tracks_simple_components_with_simple_dependencies_havingDynamicDependencies_requiring_decommission()
 		{
 			container.Register(Transient<B>(),
-			                   Transient<A>().DynamicParameters((kernel, parameters) => delegate { }));
+							   Transient<A>().DynamicParameters((kernel, parameters) => delegate { }));
 
 			var b = container.Resolve<B>();
 

@@ -1,4 +1,4 @@
-namespace Castle.Windsor.Tests.Bugs.FACILITIES_ISSUE_111.Components
+namespace CastleTests.Bugs.Components
 {
 	public interface IA_Facilities_Issue_111
 	{

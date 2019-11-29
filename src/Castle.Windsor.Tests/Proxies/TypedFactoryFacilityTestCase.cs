@@ -15,10 +15,11 @@
 namespace CastleTests.Proxies
 {
 	using Castle.DynamicProxy;
-	using Castle.TypedFactoryInterfaces;
 	using Castle.Windsor;
 	using Castle.Windsor.Configuration.Interpreters;
-	using Castle.XmlFiles;
+
+	using CastleTests.TypedFactoryInterfaces;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 

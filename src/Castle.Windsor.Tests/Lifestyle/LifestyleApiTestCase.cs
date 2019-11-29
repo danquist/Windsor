@@ -18,8 +18,8 @@ namespace CastleTests.Lifestyle
 
 	using Castle.Core;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;

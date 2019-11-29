@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Registration.Interceptors.Single
+namespace CastleTests.Registration.Interceptors.Single
 {
 	using System.Collections.Generic;
 

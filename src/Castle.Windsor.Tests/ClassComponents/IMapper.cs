@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.ClassComponents
+namespace CastleTests.ClassComponents
 {
 	/// <summary>
 	/// Summary description for IMapper.
@@ -36,7 +36,7 @@ namespace Castle.MicroKernel.Tests.ClassComponents
 	{
 	}
 
-	public interface IGenericMapper<T>{}
+	public interface IGenericMapper<T> { }
 
 	/// <summary>
 	/// Summary description for CommonImpl1Mapper.

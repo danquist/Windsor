@@ -18,12 +18,10 @@ namespace CastleTests
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers.SpecializedResolvers;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests;
-	using Castle.Windsor.Tests.Interceptors;
 
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -35,7 +33,7 @@ namespace CastleTests
 		{
 			Kernel.Resolver.AddSubResolver(new CollectionResolver(Kernel, allowEmptyCollections: false));
 			Container.Register(Component.For(typeof(UsesArrayOfGeneric<>)),
-			                   Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl1<>)));
+							   Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl1<>)));
 
 			Container.Resolve<UsesArrayOfGeneric<int>>();
 		}
@@ -44,7 +42,7 @@ namespace CastleTests
 		public void Can_create_nonGeneric_with_ctor_dependency_on_generic()
 		{
 			Container.Register(Component.For<NeedsGenericType>(),
-			                   Component.For(typeof(ICache<>)).ImplementedBy(typeof(NullCache<>)));
+							   Component.For(typeof(ICache<>)).ImplementedBy(typeof(NullCache<>)));
 
 			var needsGenericType = Container.Resolve<NeedsGenericType>();
 
@@ -55,14 +53,14 @@ namespace CastleTests
 		public void Can_intercept_open_generic_components()
 		{
 			Container.Register(Component.For<CollectInterceptedIdInterceptor>(),
-			                   Component.For(typeof(Components.IRepository<>)).ImplementedBy(typeof(DemoRepository<>))
-				                   .Interceptors<CollectInterceptedIdInterceptor>());
+							   Component.For(typeof(Components.IRepository<>)).ImplementedBy(typeof(DemoRepository<>))
+								   .Interceptors<CollectInterceptedIdInterceptor>());
 
 			var demoRepository = Container.Resolve<Components.IRepository<object>>();
 			demoRepository.Get(12);
 
 			Assert.AreEqual(12, CollectInterceptedIdInterceptor.InterceptedId,
-			                "invocation should have been intercepted by MyInterceptor");
+							"invocation should have been intercepted by MyInterceptor");
 		}
 
 		[Test]
@@ -70,9 +68,9 @@ namespace CastleTests
 		{
 			Container.AddFacility<MyInterceptorGreedyFacility>();
 			Container.Register(Component.For<StandardInterceptor>().Named("interceptor"),
-			                   Component.For<Components.IRepository<Employee>>()
-				                   .ImplementedBy<DemoRepository<Employee>>()
-				                   .Named("key"));
+							   Component.For<Components.IRepository<Employee>>()
+								   .ImplementedBy<DemoRepository<Employee>>()
+								   .Named("key"));
 
 			var store = Container.Resolve<Components.IRepository<Employee>>();
 
@@ -84,7 +82,7 @@ namespace CastleTests
 		{
 			Container.AddFacility<MyInterceptorGreedyFacility2>();
 			Container.Register(Component.For<StandardInterceptor>().Named("interceptor"),
-			                   Component.For(typeof(Components.IRepository<>)).ImplementedBy(typeof(DemoRepository<>)));
+							   Component.For(typeof(Components.IRepository<>)).ImplementedBy(typeof(DemoRepository<>)));
 
 			var store = Container.Resolve<Components.IRepository<Employee>>();
 
@@ -96,9 +94,9 @@ namespace CastleTests
 		public void Open_generic_as_dependency_does_not_block_resolvability_of_parent()
 		{
 			Container.Register(Component.For(typeof(IGeneric<>))
-				                   .ImplementedBy(typeof(GenericWithTDependency<>)),
-			                   Component.For<UsesIGeneric<A>>(),
-			                   Component.For<A>().UsingFactoryMethod(() => new A()));
+								   .ImplementedBy(typeof(GenericWithTDependency<>)),
+							   Component.For<UsesIGeneric<A>>(),
+							   Component.For<A>().UsingFactoryMethod(() => new A()));
 
 			var handler = Kernel.GetHandler(typeof(UsesIGeneric<A>));
 			Assert.AreEqual(HandlerState.Valid, handler.CurrentState);
@@ -126,7 +124,7 @@ namespace CastleTests
 		public void Open_generic_trasient_via_attribute_produces_unique_instances()
 		{
 			Container.Register(Component.For(typeof(Components.IRepository<>))
-				                   .ImplementedBy(typeof(TransientRepository<>)));
+								   .ImplementedBy(typeof(TransientRepository<>)));
 
 			var o1 = Container.Resolve<Components.IRepository<Employee>>();
 			var o2 = Container.Resolve<Components.IRepository<Employee>>();
@@ -161,9 +159,9 @@ namespace CastleTests
 		{
 			Container.AddFacility<MyInterceptorGreedyFacility2>();
 			Container.Register(Component.For<StandardInterceptor>().Named("interceptor"),
-			                   Component.For(typeof(Components.IRepository<>))
-				                   .ImplementedBy(typeof(DemoRepository<>))
-				                   .LifeStyle.Transient);
+							   Component.For(typeof(Components.IRepository<>))
+								   .ImplementedBy(typeof(DemoRepository<>))
+								   .LifeStyle.Transient);
 
 			var store = Container.Resolve<Components.IRepository<Employee>>();
 			var anotherStore = Container.Resolve<Components.IRepository<Employee>>();
@@ -177,12 +175,12 @@ namespace CastleTests
 		public void Proxy_parent_does_not_make_generic_child_a_proxy()
 		{
 			Container.Register(Component.For<CollectInterceptedIdInterceptor>(),
-			                   Component.For<ISpecification>()
-				                   .ImplementedBy<MySpecification>()
-				                   .Interceptors<CollectInterceptedIdInterceptor>(),
-			                   Component.For(typeof(Components.IRepository<>))
-				                   .ImplementedBy(typeof(TransientRepository<>))
-				                   .Named("repos"));
+							   Component.For<ISpecification>()
+								   .ImplementedBy<MySpecification>()
+								   .Interceptors<CollectInterceptedIdInterceptor>(),
+							   Component.For(typeof(Components.IRepository<>))
+								   .ImplementedBy(typeof(TransientRepository<>))
+								   .Named("repos"));
 
 			var specification = Container.Resolve<ISpecification>();
 

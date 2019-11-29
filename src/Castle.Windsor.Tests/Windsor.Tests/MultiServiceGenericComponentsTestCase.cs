@@ -16,12 +16,12 @@ namespace CastleTests.Windsor.Tests
 {
 	using System;
 
-	using Castle.Generics;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
 
 	using CastleTests.Components;
+	using CastleTests.Generics;
 
 	using NUnit.Framework;
 

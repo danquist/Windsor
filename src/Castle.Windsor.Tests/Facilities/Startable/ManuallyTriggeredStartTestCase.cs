@@ -17,9 +17,9 @@ namespace CastleTests.Facilities.Startable
 	using Castle.Facilities.Startable;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests;
-	using Castle.Windsor.Tests.Facilities.Startable.Components;
+
+	using CastleTests.ClassComponents;
+	using CastleTests.Facilities.Startable.Components;
 
 	using NUnit.Framework;
 

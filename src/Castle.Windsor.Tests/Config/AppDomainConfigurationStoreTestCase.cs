@@ -15,13 +15,14 @@
 
 #if FEATURE_SYSTEM_CONFIGURATION
 
-namespace Castle.Windsor.Tests.Config
+namespace CastleTests.Config
 {
 	using Castle.Core.Resource;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.SubSystems.Configuration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 	using Castle.Windsor.Configuration.Interpreters;
+
+	using CastleTests.ClassComponents;
 
 	using NUnit.Framework;
 

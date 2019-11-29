@@ -14,8 +14,6 @@
 
 namespace CastleTests.ClassComponents
 {
-	using Castle.MicroKernel.Tests.ClassComponents;
-
 	public class CommonServiceUser2
 	{
 		public ICommon CommonService { get; set; }

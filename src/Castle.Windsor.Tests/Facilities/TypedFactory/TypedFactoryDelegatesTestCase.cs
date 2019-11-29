@@ -21,21 +21,19 @@ namespace CastleTests.Facilities.TypedFactory
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Releasers;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.Windsor.Tests.Facilities.TypedFactory;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Components;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Delegates;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Selectors;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Components;
 	using CastleTests.Facilities.TypedFactory.Delegates;
+	using CastleTests.Facilities.TypedFactory.Factories;
+	using CastleTests.Facilities.TypedFactory.Selectors;
 	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
-	using HasTwoConstructors = Castle.Windsor.Tests.Facilities.TypedFactory.Delegates.HasTwoConstructors;
-	using ServiceFactory = Castle.Windsor.Tests.Facilities.TypedFactory.ServiceFactory;
+	using HasTwoConstructors = CastleTests.Facilities.TypedFactory.Delegates.HasTwoConstructors;
+	using ServiceFactory = CastleTests.Facilities.TypedFactory.Components.ServiceFactory;
 
 	[TestFixture]
 	public class TypedFactoryDelegatesTestCase : AbstractContainerTestCase
@@ -49,9 +47,9 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_register_generic_delegate_factory_explicitly_as_open_generic_optional_dependency()
 		{
 			Container.Register(Component.For<Foo>().LifeStyle.Transient,
-			                   Component.For<Bar>().LifeStyle.Transient,
-			                   Component.For<UsesFooAndBarDelegateProperties>(),
-			                   Component.For(typeof(Func<>)).AsFactory());
+							   Component.For<Bar>().LifeStyle.Transient,
+							   Component.For<UsesFooAndBarDelegateProperties>(),
+							   Component.For(typeof(Func<>)).AsFactory());
 
 			var instance = Container.Resolve<UsesFooAndBarDelegateProperties>();
 
@@ -71,9 +69,9 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_register_generic_delegate_factory_explicitly_as_open_generic_required_dependency()
 		{
 			Container.Register(Component.For<Foo>().LifeStyle.Transient,
-			                   Component.For<Bar>().LifeStyle.Transient,
-			                   Component.For<UsesFooAndBarDelegateCtor>(),
-			                   Component.For(typeof(Func<>)).AsFactory());
+							   Component.For<Bar>().LifeStyle.Transient,
+							   Component.For<UsesFooAndBarDelegateCtor>(),
+							   Component.For(typeof(Func<>)).AsFactory());
 
 			var instance = Container.Resolve<UsesFooAndBarDelegateCtor>();
 
@@ -93,7 +91,7 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_resolve_component_depending_on_delegate_when_inline_argumens_are_provided()
 		{
 			Container.Register(Component.For<Foo>(),
-			                   Component.For<UsesFooDelegateAndInt>());
+							   Component.For<UsesFooDelegateAndInt>());
 
 			Container.Resolve<UsesFooDelegateAndInt>(Arguments.FromProperties(new { additionalArgument = 5 }));
 		}
@@ -112,7 +110,7 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_resolve_generic_component_depending_on_delegate_of_generic()
 		{
 			Container.Register(Component.For(typeof(GenericComponent<>)).LifeStyle.Transient,
-			                   Component.For(typeof(GenericUsesFuncOfGenerics<>)).LifeStyle.Transient);
+							   Component.For(typeof(GenericUsesFuncOfGenerics<>)).LifeStyle.Transient);
 			var one = Container.Resolve<GenericUsesFuncOfGenerics<int>>();
 			var two = Container.Resolve<GenericUsesFuncOfGenerics<string>>();
 			one.Func();
@@ -148,8 +146,8 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_resolve_two_services_depending_on_identical_delegates()
 		{
 			Container.Register(Component.For<Foo>().LifeStyle.Transient,
-			                   Component.For<UsesFooDelegate>(),
-			                   Component.For<UsesFooDelegateAndInt>().DependsOn(new Arguments().AddTyped(5)));
+							   Component.For<UsesFooDelegate>(),
+							   Component.For<UsesFooDelegateAndInt>().DependsOn(new Arguments().AddTyped(5)));
 			var one = Container.Resolve<UsesFooDelegate>();
 			var two = Container.Resolve<UsesFooDelegateAndInt>();
 			one.GetFoo();
@@ -160,9 +158,9 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Can_resolve_two_services_depending_on_identical_delegates_via_interface_based_factory()
 		{
 			Container.Register(Component.For<Foo>().LifeStyle.Transient,
-			                   Component.For<UsesFooDelegate>(),
-			                   Component.For<UsesFooDelegateAndInt>().DependsOn(new Arguments().AddTyped(5)),
-			                   Component.For<IGenericComponentsFactory>().AsFactory());
+							   Component.For<UsesFooDelegate>(),
+							   Component.For<UsesFooDelegateAndInt>().DependsOn(new Arguments().AddTyped(5)),
+							   Component.For<IGenericComponentsFactory>().AsFactory());
 
 			var factory = Container.Resolve<IGenericComponentsFactory>();
 
@@ -254,7 +252,7 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Factory_constructor_dependency_is_satisfied_implicitly_even_if_less_greedy_constructor_is_readily_available()
 		{
 			Container.Register(Component.For<Bar>().LifeStyle.Transient,
-			                   Component.For<UsesBarDelegateTwoConstructors>().LifeStyle.Transient);
+							   Component.For<UsesBarDelegateTwoConstructors>().LifeStyle.Transient);
 
 			var component = Container.Resolve<UsesBarDelegateTwoConstructors>();
 
@@ -267,7 +265,7 @@ namespace CastleTests.Facilities.TypedFactory
 			DisposableFoo.ResetDisposedCount();
 
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Transient,
-			                   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
+							   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
 			var dependsOnFoo = Container.Resolve<UsesDisposableFooDelegate>();
 
 			var tracker = ReferenceTracker.Track(() => dependsOnFoo.GetFoo());
@@ -310,11 +308,11 @@ namespace CastleTests.Facilities.TypedFactory
 		[Test]
 		public void Factory_obeys_release_policy_non_tracking()
 		{
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
 			Container.Kernel.ReleasePolicy = new NoTrackingReleasePolicy();
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Transient,
-			                   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
+							   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
 			var dependsOnFoo = Container.Resolve<UsesDisposableFooDelegate>();
 
 			ReferenceTracker
@@ -326,7 +324,7 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Factory_obeys_release_policy_tracking()
 		{
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Transient,
-			                   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
+							   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
 
 			var dependsOnFoo = Container.Resolve<UsesDisposableFooDelegate>();
 
@@ -353,7 +351,7 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Factory_property_dependency_is_satisfied_implicitly()
 		{
 			Container.Register(Component.For<Bar>().LifeStyle.Transient,
-			                   Component.For<UsesBarDelegateProperty>().LifeStyle.Transient);
+							   Component.For<UsesBarDelegateProperty>().LifeStyle.Transient);
 
 			var component = Container.Resolve<UsesBarDelegateProperty>();
 
@@ -376,14 +374,14 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Func_delegate_with_duplicated_Parameter_types_throws_exception()
 		{
 			Container.Register(Component.For<Baz>().Named("baz"),
-			                   Component.For<Bar>().Named("bar"),
-			                   Component.For<UsesBarDelegate>());
+							   Component.For<Bar>().Named("bar"),
+							   Component.For<UsesBarDelegate>());
 
 			var user = Container.Resolve<UsesBarDelegate>();
 
 			var exception =
 				Assert.Throws<ArgumentException>(() =>
-				                                 user.GetBar("aaa", "bbb"));
+												 user.GetBar("aaa", "bbb"));
 
 			Assert.AreEqual(
 				"Factory delegate System.Func`3[System.String,System.String,Castle.Windsor.Tests.Facilities.TypedFactory.Delegates.Bar] has duplicated arguments of type System.String. " +
@@ -405,8 +403,8 @@ namespace CastleTests.Facilities.TypedFactory
 		{
 			var foo = new DisposableFoo();
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Transient,
-			                   Component.For<Func<int, DisposableFoo>>().Instance(i => foo),
-			                   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
+							   Component.For<Func<int, DisposableFoo>>().Instance(i => foo),
+							   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
 			var dependsOnFoo = Container.Resolve<UsesDisposableFooDelegate>();
 			var otherFoo = dependsOnFoo.GetFoo();
 			Assert.AreSame(foo, otherFoo);
@@ -416,8 +414,8 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Registers_generic_delegate_factories_as_open_generics_optional_dependency()
 		{
 			Container.Register(Component.For<Foo>().LifeStyle.Transient,
-			                   Component.For<Bar>().LifeStyle.Transient,
-			                   Component.For<UsesFooAndBarDelegateProperties>());
+							   Component.For<Bar>().LifeStyle.Transient,
+							   Component.For<UsesFooAndBarDelegateProperties>());
 
 			var instance = Container.Resolve<UsesFooAndBarDelegateProperties>();
 
@@ -432,8 +430,8 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Registers_generic_delegate_factories_as_open_generics_required_dependency()
 		{
 			Container.Register(Component.For<Foo>().LifeStyle.Transient,
-			                   Component.For<Bar>().LifeStyle.Transient,
-			                   Component.For<UsesFooAndBarDelegateCtor>());
+							   Component.For<Bar>().LifeStyle.Transient,
+							   Component.For<UsesFooAndBarDelegateCtor>());
 
 			var instance = Container.Resolve<UsesFooAndBarDelegateCtor>();
 
@@ -450,7 +448,7 @@ namespace CastleTests.Facilities.TypedFactory
 			DisposableFoo.ResetDisposedCount();
 
 			Container.Register(Component.For<DisposableFoo>().LifeStyle.Transient,
-			                   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
+							   Component.For<UsesDisposableFooDelegate>().LifeStyle.Transient);
 			var dependsOnFoo = Container.Resolve<UsesDisposableFooDelegate>();
 			dependsOnFoo.GetFoo();
 
@@ -480,11 +478,11 @@ namespace CastleTests.Facilities.TypedFactory
 		public void Resolution_ShouldNotThrow_When_TwoDelegateFactoriesAreResolvedWithOnePreviouslyLazyLoaded_WithMultipleCtors()
 		{
 			Container.Register(Component.For<SimpleComponent1>(),
-			                   Component.For<SimpleComponent2>(),
-			                   Component.For<SimpleComponent3>(),
-			                   Component.For<ServiceFactory>(),
-			                   Component.For<ServiceRedirect>(),
-			                   Component.For<ServiceWithMultipleCtors>());
+							   Component.For<SimpleComponent2>(),
+							   Component.For<SimpleComponent3>(),
+							   Component.For<ServiceFactory>(),
+							   Component.For<ServiceRedirect>(),
+							   Component.For<ServiceWithMultipleCtors>());
 
 			var factory = Container.Resolve<ServiceFactory>();
 			factory.Factory();

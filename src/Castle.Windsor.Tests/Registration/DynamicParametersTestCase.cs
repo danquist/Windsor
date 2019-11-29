@@ -12,17 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Registration
+namespace CastleTests.Registration
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
-
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
-	using CastleTests;
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -132,9 +127,9 @@ namespace Castle.MicroKernel.Tests.Registration
 			var arg1 = "bar";
 			var arg2 = 5;
 			Kernel.Register(Component.For<ClassWithArguments>()
-			                	.LifeStyle.Transient
-			                	.DynamicParameters((k, d) => { d["arg1"] = arg1; })
-			                	.DynamicParameters((k, d) => { d["arg2"] = arg2; }));
+								.LifeStyle.Transient
+								.DynamicParameters((k, d) => { d["arg1"] = arg1; })
+								.DynamicParameters((k, d) => { d["arg2"] = arg2; }));
 			var component = Kernel.Resolve<ClassWithArguments>(new Arguments().AddNamed("arg2", 2).AddNamed("arg1", "foo"));
 			Assert.AreEqual(arg1, component.Arg1);
 			Assert.AreEqual(arg2, component.Arg2);
@@ -189,7 +184,7 @@ namespace Castle.MicroKernel.Tests.Registration
 			}));
 
 			Assert.DoesNotThrow(() =>
-			                    Kernel.Resolve<ClassWithArguments>());
+								Kernel.Resolve<ClassWithArguments>());
 		}
 	}
 }

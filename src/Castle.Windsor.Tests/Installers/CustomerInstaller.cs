@@ -16,8 +16,9 @@ namespace CastleTests.Installers
 {
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.SubSystems.Configuration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 	using Castle.Windsor;
+
+	using CastleTests.ClassComponents;
 
 	public class CustomerInstaller : IWindsorInstaller
 	{

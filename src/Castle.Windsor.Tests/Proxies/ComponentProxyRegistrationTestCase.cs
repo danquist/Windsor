@@ -20,10 +20,10 @@ namespace CastleTests.Proxies
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.ProxyInfrastructure;
-	using Castle.Windsor.Tests.Interceptors;
 
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
+	using CastleTests.ProxyInfrastructure;
 
 	using NUnit.Framework;
 
@@ -39,8 +39,8 @@ namespace CastleTests.Proxies
 		public void AddComponent_WithMixIn_AddsMixin()
 		{
 			Container.Register(Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Proxy.MixIns(new SimpleMixIn())
+								   .ImplementedBy<CalculatorService>()
+								   .Proxy.MixIns(new SimpleMixIn())
 				);
 
 			var calculator = Container.Resolve<ICalcService>();
@@ -101,15 +101,15 @@ namespace CastleTests.Proxies
 		public void Missing_dependency_on_hook_statically_detected()
 		{
 			Container.Register(Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Proxy.Hook(h => h.Service<ProxyNothingHook>()));
+								   .ImplementedBy<CalculatorService>()
+								   .Proxy.Hook(h => h.Service<ProxyNothingHook>()));
 
 			var calc = Container.Kernel.GetHandler(typeof(ICalcService));
 			Assert.AreEqual(HandlerState.WaitingDependency, calc.CurrentState);
 
 			var exception =
 				Assert.Throws<HandlerException>(() =>
-				                                Container.Resolve<ICalcService>());
+												Container.Resolve<ICalcService>());
 			Assert.AreEqual(
 				string.Format(
 					"Can't create component '{1}' as it has dependencies to be satisfied.{0}{0}'{1}' is waiting for the following dependencies:{0}- Component 'Castle.ProxyInfrastructure.ProxyNothingHook' (via override) which was not found. Did you forget to register it or misspelled the name? If the component is registered and override is via type make sure it doesn't have non-default name assigned explicitly or override the dependency via name.{0}",
@@ -122,15 +122,15 @@ namespace CastleTests.Proxies
 		public void Missing_dependency_on_mixin_statically_detected()
 		{
 			Container.Register(Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Proxy.MixIns(m => m.Component<A>()));
+								   .ImplementedBy<CalculatorService>()
+								   .Proxy.MixIns(m => m.Component<A>()));
 
 			var calc = Container.Kernel.GetHandler(typeof(ICalcService));
 			Assert.AreEqual(HandlerState.WaitingDependency, calc.CurrentState);
 
 			var exception =
 				Assert.Throws<HandlerException>(() =>
-				                                Container.Resolve<ICalcService>());
+												Container.Resolve<ICalcService>());
 			var message = string.Format(
 				"Can't create component '{1}' as it has dependencies to be satisfied.{0}{0}'{1}' is waiting for the following dependencies:{0}- Component '{2}' (via override) which was not found. Did you forget to register it or misspelled the name? If the component is registered and override is via type make sure it doesn't have non-default name assigned explicitly or override the dependency via name.{0}",
 				Environment.NewLine,
@@ -143,15 +143,15 @@ namespace CastleTests.Proxies
 		public void Missing_dependency_on_selector_statically_detected()
 		{
 			Container.Register(Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .SelectInterceptorsWith(s => s.Service<DummyInterceptorSelector>()));
+								   .ImplementedBy<CalculatorService>()
+								   .SelectInterceptorsWith(s => s.Service<DummyInterceptorSelector>()));
 
 			var calc = Container.Kernel.GetHandler(typeof(ICalcService));
 			Assert.AreEqual(HandlerState.WaitingDependency, calc.CurrentState);
 
 			var exception =
 				Assert.Throws<HandlerException>(() =>
-				                                Container.Resolve<ICalcService>());
+												Container.Resolve<ICalcService>());
 			var message = string.Format(
 				"Can't create component '{1}' as it has dependencies to be satisfied.{0}{0}'{1}' is waiting for the following dependencies:{0}- Component 'Castle.Windsor.Tests.Interceptors.DummyInterceptorSelector' (via override) which was not found. Did you forget to register it or misspelled the name? If the component is registered and override is via type make sure it doesn't have non-default name assigned explicitly or override the dependency via name.{0}",
 				Environment.NewLine,
@@ -187,10 +187,10 @@ namespace CastleTests.Proxies
 			var interceptor = new ResultModifierInterceptor(5);
 			var hook = new ProxyNothingHook();
 			Container.Register(Component.For<ResultModifierInterceptor>().Instance(interceptor),
-			                   Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Interceptors<ResultModifierInterceptor>()
-				                   .Proxy.Hook(hook));
+							   Component.For<ICalcService>()
+								   .ImplementedBy<CalculatorService>()
+								   .Interceptors<ResultModifierInterceptor>()
+								   .Proxy.Hook(hook));
 
 			var calculator = Container.Resolve<ICalcService>();
 			AssertIsProxy(calculator);
@@ -203,10 +203,10 @@ namespace CastleTests.Proxies
 			var interceptor = new ResultModifierInterceptor(5);
 			var hook = new ProxyNothingHook();
 			Container.Register(Component.For<ResultModifierInterceptor>().Instance(interceptor),
-			                   Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Interceptors<ResultModifierInterceptor>()
-				                   .Proxy.Hook(h => h.Instance(hook)));
+							   Component.For<ICalcService>()
+								   .ImplementedBy<CalculatorService>()
+								   .Interceptors<ResultModifierInterceptor>()
+								   .Proxy.Hook(h => h.Instance(hook)));
 
 			var calculator = Container.Resolve<ICalcService>();
 			AssertIsProxy(calculator);
@@ -218,11 +218,11 @@ namespace CastleTests.Proxies
 		{
 			var interceptor = new ResultModifierInterceptor(5);
 			Container.Register(Component.For<ResultModifierInterceptor>().Instance(interceptor),
-			                   Component.For<ProxyNothingHook>().Named("hook"),
-			                   Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Interceptors<ResultModifierInterceptor>()
-				                   .Proxy.Hook(h => h.Service("hook")));
+							   Component.For<ProxyNothingHook>().Named("hook"),
+							   Component.For<ICalcService>()
+								   .ImplementedBy<CalculatorService>()
+								   .Interceptors<ResultModifierInterceptor>()
+								   .Proxy.Hook(h => h.Service("hook")));
 
 			var calculator = Container.Resolve<ICalcService>();
 			AssertIsProxy(calculator);
@@ -234,11 +234,11 @@ namespace CastleTests.Proxies
 		{
 			var interceptor = new ResultModifierInterceptor(5);
 			Container.Register(Component.For<ResultModifierInterceptor>().Instance(interceptor),
-			                   Component.For<ProxyNothingHook>(),
-			                   Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Interceptors<ResultModifierInterceptor>()
-				                   .Proxy.Hook(h => h.Service<ProxyNothingHook>()));
+							   Component.For<ProxyNothingHook>(),
+							   Component.For<ICalcService>()
+								   .ImplementedBy<CalculatorService>()
+								   .Interceptors<ResultModifierInterceptor>()
+								   .Proxy.Hook(h => h.Service<ProxyNothingHook>()));
 
 			var calculator = Container.Resolve<ICalcService>();
 			AssertIsProxy(calculator);
@@ -249,7 +249,7 @@ namespace CastleTests.Proxies
 		public void can_proxy_interfaces_with_no_impl_given_just_a_hook()
 		{
 			Container.Register(Component.For<ICalcService>()
-				                   .Proxy.Hook(h => h.Instance(new ProxyNothingHook())));
+								   .Proxy.Hook(h => h.Instance(new ProxyNothingHook())));
 
 			var calculator = Container.Resolve<ICalcService>();
 			AssertIsProxy(calculator);
@@ -262,11 +262,11 @@ namespace CastleTests.Proxies
 			DisposableHook.InstancesDisposed = 0;
 			var interceptor = new ResultModifierInterceptor(5);
 			Container.Register(Component.For<ResultModifierInterceptor>().Instance(interceptor),
-			                   Component.For<DisposableHook>().Named("hook").LifeStyle.Transient,
-			                   Component.For<ICalcService>()
-				                   .ImplementedBy<CalculatorService>()
-				                   .Interceptors<ResultModifierInterceptor>()
-				                   .Proxy.Hook(h => h.Service("hook")));
+							   Component.For<DisposableHook>().Named("hook").LifeStyle.Transient,
+							   Component.For<ICalcService>()
+								   .ImplementedBy<CalculatorService>()
+								   .Interceptors<ResultModifierInterceptor>()
+								   .Proxy.Hook(h => h.Service("hook")));
 
 			var calculator = Container.Resolve<ICalcService>();
 			AssertIsProxy(calculator);

@@ -17,7 +17,6 @@ namespace CastleTests
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.SubSystems.Conversion;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
@@ -173,7 +172,7 @@ namespace CastleTests
 					.DependsOn(Property.ForKey("value").Eq(2)),
 				Component.For(typeof(UsesIGeneric<>))
 					.DependsOn(ServiceOverride.ForKey(typeof(IGeneric<>)).Eq("non-default-open"),
-					           ServiceOverride.ForKey(typeof(IGeneric<int>)).Eq("non-default-int"))
+							   ServiceOverride.ForKey(typeof(IGeneric<int>)).Eq("non-default-int"))
 				);
 
 			var withString = Kernel.Resolve<UsesIGeneric<string>>();
@@ -191,7 +190,7 @@ namespace CastleTests
 			Kernel.Register(Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl1<>)).Named("default"));
 			Kernel.Register(Component.For(typeof(IGeneric<>)).ImplementedBy(typeof(GenericImpl2<>)).Named("non-default"));
 			Kernel.Register(Component.For(typeof(UsesIGeneric<>))
-			                	.DependsOn(ServiceOverride.ForKey(typeof(IGeneric<>)).Eq("non-default")));
+								.DependsOn(ServiceOverride.ForKey(typeof(IGeneric<>)).Eq("non-default")));
 
 			var item = Kernel.Resolve<UsesIGeneric<string>>();
 

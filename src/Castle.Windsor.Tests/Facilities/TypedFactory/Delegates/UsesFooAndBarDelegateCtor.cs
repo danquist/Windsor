@@ -16,8 +16,6 @@ namespace CastleTests.Facilities.TypedFactory.Delegates
 {
 	using System;
 
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Delegates;
-
 	public class UsesFooAndBarDelegateCtor
 	{
 		public UsesFooAndBarDelegateCtor(Func<Bar> barFactory, Func<Foo> fooFactory)

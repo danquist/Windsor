@@ -27,7 +27,6 @@ namespace CastleTests.Pools
 	using Castle.MicroKernel.Lifestyle.Pool;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.SubSystems.Configuration;
-	using Castle.MicroKernel.Tests.Pools;
 	using Castle.Windsor;
 
 	using CastleTests.Components;

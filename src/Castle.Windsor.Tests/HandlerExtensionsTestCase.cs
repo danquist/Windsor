@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -21,7 +21,6 @@ namespace Castle.Windsor.Tests
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
 
-	using CastleTests;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -30,7 +29,7 @@ namespace Castle.Windsor.Tests
 	public class HandlerExtensionsTestCase : AbstractContainerTestCase
 	{
 		private ComponentRegistration<A> AddResolveExtensions(ComponentRegistration<A> componentRegistration,
-		                                                      params IResolveExtension[] items)
+															  params IResolveExtension[] items)
 		{
 			var resolveExtensions = new List<IResolveExtension>();
 			foreach (var item in items.Distinct())

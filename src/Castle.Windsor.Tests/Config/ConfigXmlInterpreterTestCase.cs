@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests
+namespace CastleTests.Config
 {
 	using System.Linq;
 
@@ -20,11 +20,12 @@ namespace Castle.Windsor.Tests
 	using Castle.Core.Resource;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.SubSystems.Configuration;
-	using Castle.MicroKernel.Tests.ClassComponents;
+	using Castle.Windsor;
 	using Castle.Windsor.Configuration.Interpreters;
-	using Castle.XmlFiles;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 
@@ -42,7 +43,7 @@ namespace Castle.Windsor.Tests
 			var container = new WindsorContainer(store);
 
 			var handler = container.Kernel.GetHandler(typeof(ICalcService));
-			Assert.AreEqual(Core.LifestyleType.Transient, handler.ComponentModel.LifestyleType);
+			Assert.AreEqual(Castle.Core.LifestyleType.Transient, handler.ComponentModel.LifestyleType);
 		}
 
 		[Test]
@@ -155,7 +156,7 @@ namespace Castle.Windsor.Tests
 		[Test]
 		public void ShouldThrowIfIdAttributeIsPresentInFacilityConfig()
 		{
-			var facilityConfig = Installer.Configuration.FromXml(
+			var facilityConfig = Castle.Windsor.Installer.Configuration.FromXml(
 				new StaticContentResource(
 					@"<castle>
 <facilities>

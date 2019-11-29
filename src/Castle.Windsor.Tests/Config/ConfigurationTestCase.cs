@@ -12,21 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests.Configuration
+namespace CastleTests.Config
 {
 	using Castle.Core;
 	using Castle.Core.Configuration;
 	using Castle.Core.Resource;
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.MicroKernel.Tests.Configuration.Components;
 	using Castle.Windsor;
 	using Castle.Windsor.Installer;
-	using Castle.Windsor.Tests.Components;
 
-	using CastleTests;
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Config.Components;
 
 	using NUnit.Framework;
 
@@ -38,9 +36,9 @@ namespace Castle.MicroKernel.Tests.Configuration
 		public void Type_not_implementing_service_should_throw()
 		{
 			var exception = Assert.Throws<ComponentRegistrationException>(() =>
-			                                                              Container.Install(Configuration.FromXml(
-			                                                              	new StaticContentResource(
-			                                                              		@"<castle>
+																		  Container.Install(Configuration.FromXml(
+																			  new StaticContentResource(
+																				  @"<castle>
 <components>
     <component
         service=""EmptyServiceA""
@@ -49,9 +47,9 @@ namespace Castle.MicroKernel.Tests.Configuration
 </castle>"))));
 
 			var expected = string.Format("Could not set up component '{0}'. Type '{1}' does not implement service '{2}'",
-			                             typeof(IEmptyService).FullName,
-			                             typeof(IEmptyService).AssemblyQualifiedName,
-			                             typeof(EmptyServiceA).AssemblyQualifiedName);
+										 typeof(IEmptyService).FullName,
+										 typeof(IEmptyService).AssemblyQualifiedName,
+										 typeof(EmptyServiceA).AssemblyQualifiedName);
 
 			Assert.AreEqual(expected, exception.Message);
 		}
@@ -247,8 +245,8 @@ namespace Castle.MicroKernel.Tests.Configuration
 			Kernel.ConfigurationStore.AddComponentConfiguration("key", confignode);
 
 			Kernel.Register(Component.For<ClassWithArrayConstructor>().Named("key"),
-			                Component.For<ICommon>().ImplementedBy<CommonImpl1>().Named("commonservice1"),
-			                Component.For<ICommon>().ImplementedBy<CommonImpl2>().Named("commonservice2"));
+							Component.For<ICommon>().ImplementedBy<CommonImpl1>().Named("commonservice1"),
+							Component.For<ICommon>().ImplementedBy<CommonImpl2>().Named("commonservice2"));
 
 			var instance = Kernel.Resolve<ClassWithArrayConstructor>("key");
 			Assert.IsNotNull(instance.Services);

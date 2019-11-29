@@ -19,7 +19,6 @@ namespace CastleTests.Bugs.Ioc113
 	using Castle.Facilities.Startable;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.Bugs.Ioc113;
 
 	using NUnit.Framework;
 

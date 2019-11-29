@@ -20,8 +20,8 @@ namespace CastleTests.Activators
 	using Castle.MicroKernel.ComponentActivator;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.SubSystems.Configuration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -34,9 +34,9 @@ namespace CastleTests.Activators
 		public void ConstructorWithMoreArguments()
 		{
 			Container.Register(Component.For<A>(),
-			                   Component.For<B>(),
-			                   Component.For<C>(),
-			                   Component.For<ServiceUser>());
+							   Component.For<B>(),
+							   Component.For<C>(),
+							   Component.For<ServiceUser>());
 
 			var service = Container.Resolve<ServiceUser>();
 
@@ -50,7 +50,7 @@ namespace CastleTests.Activators
 		public void ConstructorWithOneArgument()
 		{
 			Container.Register(Component.For<A>().Named("a"),
-			                   Component.For<ServiceUser>().Named("service"));
+							   Component.For<ServiceUser>().Named("service"));
 
 			var service = Container.Resolve<ServiceUser>("service");
 
@@ -64,8 +64,8 @@ namespace CastleTests.Activators
 		public void ConstructorWithTwoArguments()
 		{
 			Container.Register(Component.For<A>().Named("a"),
-			                   Component.For<B>().Named("b"),
-			                   Component.For<ServiceUser>().Named("service"));
+							   Component.For<B>().Named("b"),
+							   Component.For<ServiceUser>().Named("service"));
 
 			var service = Container.Resolve<ServiceUser>("service");
 
@@ -102,7 +102,7 @@ namespace CastleTests.Activators
 			Kernel.ConfigurationStore = store;
 
 			Container.Register(Component.For<A>().Named("a"),
-			                   Component.For<ServiceUser2>().Named("service"));
+							   Component.For<ServiceUser2>().Named("service"));
 
 			var service = Container.Resolve<ServiceUser2>("service");
 
@@ -131,7 +131,7 @@ namespace CastleTests.Activators
 			Kernel.ConfigurationStore = store;
 
 			Container.Register(Component.For<A>().Named("a"),
-			                   Component.For<ServiceUser2>().Named("service"));
+							   Component.For<ServiceUser2>().Named("service"));
 
 			var service = Container.Resolve<ServiceUser2>("service");
 
@@ -148,8 +148,8 @@ namespace CastleTests.Activators
 		public void Two_constructors_but_one_with_satisfiable_dependencies()
 		{
 			Container.Register(Component.For<SimpleComponent1>(),
-			                   Component.For<SimpleComponent2>(),
-			                   Component.For<HasTwoConstructors3>());
+							   Component.For<SimpleComponent2>(),
+							   Component.For<HasTwoConstructors3>());
 			var component = Container.Resolve<HasTwoConstructors3>();
 			Assert.IsNotNull(component.X);
 			Assert.IsNotNull(component.Y);
@@ -160,8 +160,8 @@ namespace CastleTests.Activators
 		public void Two_constructors_but_one_with_satisfiable_dependencies_issue_IoC_209()
 		{
 			Container.Register(Component.For<SimpleComponent1>(),
-			                   Component.For<SimpleComponent2>(),
-			                   Component.For<HasTwoConstructors4>());
+							   Component.For<SimpleComponent2>(),
+							   Component.For<HasTwoConstructors4>());
 
 			Container.Resolve<HasTwoConstructors4>();
 		}
@@ -170,8 +170,8 @@ namespace CastleTests.Activators
 		public void Two_constructors_but_one_with_satisfiable_dependencies_registering_dependencies_last()
 		{
 			Container.Register(Component.For<HasTwoConstructors3>(),
-			                   Component.For<SimpleComponent1>(),
-			                   Component.For<SimpleComponent2>());
+							   Component.For<SimpleComponent1>(),
+							   Component.For<SimpleComponent2>());
 			var component = Container.Resolve<HasTwoConstructors3>();
 			Assert.IsNotNull(component.X);
 			Assert.IsNotNull(component.Y);
@@ -182,7 +182,7 @@ namespace CastleTests.Activators
 		public void Two_constructors_equal_number_of_parameters_pick_one_that_can_be_satisfied()
 		{
 			Container.Register(Component.For<ICommon>().ImplementedBy<CommonImpl1>(),
-			                   Component.For<HasTwoConstructors>());
+							   Component.For<HasTwoConstructors>());
 
 			Assert.DoesNotThrow(() => Container.Resolve<HasTwoConstructors>());
 		}
@@ -192,13 +192,13 @@ namespace CastleTests.Activators
 		public void Two_satisfiable_constructors_equal_number_of_inline_parameters_pick_one_with_more_service_overrides()
 		{
 			Container.Register(Component.For<ICommon>().ImplementedBy<CommonImpl1>().Named("Mucha"),
-			                   Component.For<ICustomer>().ImplementedBy<CustomerImpl>().Named("Stefan"),
-			                   Component.For<HasTwoConstructors>().Named("first")
-			                            .DependsOn(ServiceOverride.ForKey("customer").Eq("Stefan"))
-			                            .Properties(PropertyFilter.IgnoreAll),
-			                   Component.For<HasTwoConstructors>().Named("second")
-			                            .DependsOn(ServiceOverride.ForKey("common").Eq("Mucha"))
-			                            .Properties(PropertyFilter.IgnoreAll));
+							   Component.For<ICustomer>().ImplementedBy<CustomerImpl>().Named("Stefan"),
+							   Component.For<HasTwoConstructors>().Named("first")
+										.DependsOn(ServiceOverride.ForKey("customer").Eq("Stefan"))
+										.Properties(PropertyFilter.IgnoreAll),
+							   Component.For<HasTwoConstructors>().Named("second")
+										.DependsOn(ServiceOverride.ForKey("common").Eq("Mucha"))
+										.Properties(PropertyFilter.IgnoreAll));
 
 			var first = Container.Resolve<HasTwoConstructors>("first");
 			var second = Container.Resolve<HasTwoConstructors>("second");
@@ -211,8 +211,8 @@ namespace CastleTests.Activators
 		public void Two_satisfiable_constructors_identical_dependency_kinds_pick_based_on_parameter_names()
 		{
 			Container.Register(Component.For<ICommon>().ImplementedBy<CommonImpl1>(),
-			                   Component.For<ICustomer>().ImplementedBy<CustomerImpl>(),
-			                   Component.For<HasTwoConstructors>().Properties(PropertyFilter.IgnoreAll));
+							   Component.For<ICustomer>().ImplementedBy<CustomerImpl>(),
+							   Component.For<HasTwoConstructors>().Properties(PropertyFilter.IgnoreAll));
 
 			var component = Container.Resolve<HasTwoConstructors>();
 
@@ -225,8 +225,8 @@ namespace CastleTests.Activators
 		public void Two_satisfiable_constructors_pick_one_with_more_inline_parameters()
 		{
 			Container.Register(Component.For<ICommon>().ImplementedBy<CommonImpl1>(),
-			                   Component.For<HasTwoConstructors2>()
-				                   .DependsOn(Parameter.ForKey("param").Eq("foo")));
+							   Component.For<HasTwoConstructors2>()
+								   .DependsOn(Parameter.ForKey("param").Eq("foo")));
 
 			var component = Container.Resolve<HasTwoConstructors2>();
 

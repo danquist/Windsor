@@ -13,14 +13,15 @@
 // limitations under the License.
 
 #if CASTLE_SERVICES_LOGGING
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using System;
 
-	using Castle.Facilities.Logging.Tests.Classes;
 	using Castle.MicroKernel.Registration;
 	using Castle.Services.Logging.NLogIntegration;
 	using Castle.Windsor;
+
+	using CastleTests.LoggingFacility.Classes;
 
 	using NLog;
 	using NLog.Targets;

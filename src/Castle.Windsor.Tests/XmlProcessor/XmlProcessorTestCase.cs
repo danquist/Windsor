@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.XmlProcessor
+namespace CastleTests.XmlProcessor
 {
 	using System;
 	using System.IO;
@@ -57,7 +57,7 @@ namespace Castle.Windsor.Tests.XmlProcessor
 			var files = Directory.GetFiles(GetFullPath(), "*Test.xml");
 			Assert.IsNotEmpty(files);
 
-			foreach(var fileName in files)
+			foreach (var fileName in files)
 			{
 
 				if (fileName.EndsWith("PropertiesWithAttributesTest.xml"))
@@ -85,7 +85,7 @@ namespace Castle.Windsor.Tests.XmlProcessor
 
 					Assert.AreEqual(resultDocStr, resultStr);
 				}
-				catch(Exception e)
+				catch (Exception e)
 				{
 					throw new Exception("Error processing " + fileName, e);
 				}

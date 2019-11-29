@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.S
 
-namespace Castle.Windsor.Tests.ClassComponents
+namespace CastleTests.ClassComponents
 {
 	using System;
 
-	public class DisposableComponent:IDisposable
+	public class DisposableComponent : IDisposable
 	{
 		public void Dispose()
 		{

@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests
+namespace CastleTests
 {
 	using Castle.Core;
 	using Castle.Core.Internal;
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests;
 
 	using CastleTests.Components;
 

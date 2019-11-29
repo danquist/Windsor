@@ -21,9 +21,9 @@ namespace CastleTests
 	using Castle.Core;
 	using Castle.MicroKernel;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.ComponentsWithAttribute;
 
 	using CastleTests.Components;
+	using CastleTests.ComponentsWithAttribute;
 
 	using NUnit.Framework;
 
@@ -34,7 +34,7 @@ namespace CastleTests
 		public void Attribute_key_can_be_overwritten()
 		{
 			Container.Register(Classes.FromAssembly(GetCurrentAssembly()).Where(Component.IsCastleComponent)
-			                   	.ConfigureFor<HasKey>(k => k.Named("changedKey")));
+								   .ConfigureFor<HasKey>(k => k.Named("changedKey")));
 
 			Assert.IsNull(Container.Kernel.GetHandler("hasKey"));
 			Assert.IsNotNull(Container.Kernel.GetHandler("changedKey"));
@@ -44,8 +44,8 @@ namespace CastleTests
 		public void Attribute_lifestyle_can_be_overwritten()
 		{
 			Container.Register(Classes.FromAssembly(GetCurrentAssembly())
-			                   	.Where(Component.IsCastleComponent)
-			                   	.LifestylePooled());
+								   .Where(Component.IsCastleComponent)
+								   .LifestylePooled());
 
 			var handler = Container.Kernel.GetHandler("keyTransient");
 
@@ -101,8 +101,8 @@ namespace CastleTests
 		public void Attribute_type_can_be_overwritten()
 		{
 			Container.Register(Classes.FromAssembly(GetCurrentAssembly())
-			                   	.Where(Component.IsCastleComponent)
-			                   	.WithService.Self());
+								   .Where(Component.IsCastleComponent)
+								   .WithService.Self());
 
 			var handler = Container.Kernel.GetAssignableHandlers(typeof(HasType)).Single();
 

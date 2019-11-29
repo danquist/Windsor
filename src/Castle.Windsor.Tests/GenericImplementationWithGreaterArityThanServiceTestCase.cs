@@ -17,12 +17,12 @@ namespace CastleTests
 	using System;
 
 	using Castle.Core.Internal;
-	using Castle.Generics;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Generics;
 	using CastleTests.TestImplementationsOfExtensionPoints;
 
 	using NUnit.Framework;
@@ -113,11 +113,11 @@ namespace CastleTests
 		[Test]
 		public void Throws_helpful_message_when_generic_matching_strategy_returns_too_few_types()
 		{
-			Container.Register(Component.For(typeof(Castle.MicroKernel.Tests.ClassComponents.IRepository<>))
+			Container.Register(Component.For(typeof(ClassComponents.IRepository<>))
 				.ImplementedBy(typeof(DoubleRepository<,>), new StubGenericImplementationMatchingStrategy(typeof(string))));
 
 			var exception = Assert.Throws<HandlerException>(() =>
-				Container.Resolve<Castle.MicroKernel.Tests.ClassComponents.IRepository<string>>());
+				Container.Resolve<ClassComponents.IRepository<string>>());
 
 			var message =
 				string.Format(
@@ -129,11 +129,11 @@ namespace CastleTests
 		[Test]
 		public void Throws_helpful_message_when_generic_matching_strategy_returns_types_that_wont_work_with_the_type()
 		{
-			Container.Register(Component.For(typeof(Castle.MicroKernel.Tests.ClassComponents.IRepository<>))
+			Container.Register(Component.For(typeof(ClassComponents.IRepository<>))
 				.ImplementedBy(typeof(DoubleRepository<,>), new StubGenericImplementationMatchingStrategy(typeof(string), typeof(IEmployee))));
 
 			var exception = Assert.Throws<GenericHandlerTypeMismatchException>(() =>
-				Container.Resolve<Castle.MicroKernel.Tests.ClassComponents.IRepository<string>>());
+				Container.Resolve<ClassComponents.IRepository<string>>());
 
 			var message =
 				@"Types System.String, CastleTests.Components.IEmployee don't satisfy generic constraints of implementation type Castle.MicroKernel.Tests.ClassComponents.DoubleRepository`2 of component 'Castle.MicroKernel.Tests.ClassComponents.DoubleRepository`2'.this is likely a bug in the IGenericImplementationMatchingStrategy used (CastleTests.StubGenericImplementationMatchingStrategy)";

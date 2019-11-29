@@ -13,11 +13,9 @@
 // limitations under the License.
 
 #if FEATURE_CODEDOM
-namespace Castle.Bugs
+namespace CastleTests.Bugs
 {
-	using System;
 	using System.CodeDom.Compiler;
-	using System.Linq;
 	using System.Reflection;
 
 	using Castle.MicroKernel;

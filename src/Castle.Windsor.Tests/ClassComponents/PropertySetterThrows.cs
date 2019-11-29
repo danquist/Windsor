@@ -16,8 +16,6 @@ namespace CastleTests.ClassComponents
 {
 	using System;
 
-	using Castle.MicroKernel.Tests.ClassComponents;
-
 	public class PropertySetterThrows
 	{
 		public ICommon CommonService

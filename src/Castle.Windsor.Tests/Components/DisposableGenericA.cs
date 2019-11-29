@@ -14,8 +14,6 @@
 
 namespace CastleTests.Components
 {
-	using Castle.Windsor.Tests;
-
 	internal class DisposableGenericA : DisposableGeneric<A>
 	{
 	}

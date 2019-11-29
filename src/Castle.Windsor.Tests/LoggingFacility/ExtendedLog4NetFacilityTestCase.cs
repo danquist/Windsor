@@ -13,19 +13,22 @@
 // limitations under the License.
 
 #if CASTLE_SERVICES_LOGGING
-namespace Castle.Facilities.Logging.Tests
+namespace CastleTests.LoggingFacility
 {
 	using System;
 	using System.IO;
 
-	using Castle.Facilities.Logging.Tests.Classes;
 	using Castle.MicroKernel.Registration;
 	using Castle.Services.Logging.Log4netIntegration;
 	using Castle.Windsor;
+
+	using CastleTests.LoggingFacility.Classes;
+
 	using log4net;
 	using log4net.Appender;
 	using log4net.Layout;
 	using log4net.Repository.Hierarchy;
+
 	using NUnit.Framework;
 
 	/// <summary>

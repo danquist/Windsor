@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Proxies
+namespace CastleTests.Proxies
 {
 	using System;
 	using System.Linq;
@@ -20,13 +20,13 @@ namespace Castle.Proxies
 	using Castle.Core;
 	using Castle.DynamicProxy;
 	using Castle.MicroKernel.Registration;
-	using Castle.MicroKernel.Tests.ClassComponents;
-	using Castle.ProxyInfrastructure;
 	using Castle.Windsor.Installer;
-	using Castle.Windsor.Tests.Interceptors;
-	using Castle.XmlFiles;
-	using CastleTests;
+
+	using CastleTests.ClassComponents;
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
+	using CastleTests.ProxyInfrastructure;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 
@@ -48,12 +48,12 @@ namespace Castle.Proxies
 		{
 			OnBehalfAwareProxyGenerationHook.target = null;
 			Container.Register(Component.For<OnBehalfAwareProxyGenerationHook>().LifeStyle.Transient,
-			                   Component.For<StandardInterceptor>().LifeStyle.Transient,
-			                   Component.For<ISimpleService>()
-			                   	.ImplementedBy<SimpleService>()
-			                   	.LifeStyle.Transient
-			                   	.Interceptors<StandardInterceptor>()
-			                   	.Proxy.Hook(h => h.Service<OnBehalfAwareProxyGenerationHook>()));
+							   Component.For<StandardInterceptor>().LifeStyle.Transient,
+							   Component.For<ISimpleService>()
+								   .ImplementedBy<SimpleService>()
+								   .LifeStyle.Transient
+								   .Interceptors<StandardInterceptor>()
+								   .Proxy.Hook(h => h.Service<OnBehalfAwareProxyGenerationHook>()));
 
 			var service = Container.Resolve<ISimpleService>();
 
@@ -67,11 +67,11 @@ namespace Castle.Proxies
 		{
 			OnBehalfAwareProxyGenerationHook.target = null;
 			Container.Register(Component.For<OnBehalfAwareProxyGenerationHook>().LifeStyle.Transient,
-			                   Component.For<StandardInterceptor>().LifeStyle.Transient,
-			                   Component.For<UsesSimpleComponent1>().LifeStyle.Transient,
-			                   Component.For<SimpleComponent1>().LifeStyle.Transient
-			                   	.Interceptors<StandardInterceptor>()
-			                   	.Proxy.Hook(h => h.Service<OnBehalfAwareProxyGenerationHook>()));
+							   Component.For<StandardInterceptor>().LifeStyle.Transient,
+							   Component.For<UsesSimpleComponent1>().LifeStyle.Transient,
+							   Component.For<SimpleComponent1>().LifeStyle.Transient
+								   .Interceptors<StandardInterceptor>()
+								   .Proxy.Hook(h => h.Service<OnBehalfAwareProxyGenerationHook>()));
 
 			var service = Container.Resolve<UsesSimpleComponent1>();
 
@@ -85,12 +85,12 @@ namespace Castle.Proxies
 		{
 			OnBehalfAwareInterceptorSelector.target = null;
 			Container.Register(Component.For<OnBehalfAwareInterceptorSelector>().LifeStyle.Transient,
-			                   Component.For<StandardInterceptor>().LifeStyle.Transient,
-			                   Component.For<ISimpleService>()
-			                   	.ImplementedBy<SimpleService>()
-			                   	.LifeStyle.Transient
-			                   	.Interceptors<StandardInterceptor>()
-			                   	.SelectInterceptorsWith(s => s.Service<OnBehalfAwareInterceptorSelector>()));
+							   Component.For<StandardInterceptor>().LifeStyle.Transient,
+							   Component.For<ISimpleService>()
+								   .ImplementedBy<SimpleService>()
+								   .LifeStyle.Transient
+								   .Interceptors<StandardInterceptor>()
+								   .SelectInterceptorsWith(s => s.Service<OnBehalfAwareInterceptorSelector>()));
 
 			var service = Container.Resolve<ISimpleService>();
 
@@ -104,11 +104,11 @@ namespace Castle.Proxies
 		{
 			OnBehalfAwareInterceptorSelector.target = null;
 			Container.Register(Component.For<OnBehalfAwareInterceptorSelector>().LifeStyle.Transient,
-			                   Component.For<StandardInterceptor>().LifeStyle.Transient,
-			                   Component.For<UsesSimpleComponent1>().LifeStyle.Transient,
-			                   Component.For<SimpleComponent1>().LifeStyle.Transient
-			                   	.Interceptors<StandardInterceptor>()
-			                   	.SelectInterceptorsWith(s => s.Service<OnBehalfAwareInterceptorSelector>()));
+							   Component.For<StandardInterceptor>().LifeStyle.Transient,
+							   Component.For<UsesSimpleComponent1>().LifeStyle.Transient,
+							   Component.For<SimpleComponent1>().LifeStyle.Transient
+								   .Interceptors<StandardInterceptor>()
+								   .SelectInterceptorsWith(s => s.Service<OnBehalfAwareInterceptorSelector>()));
 
 			var service = Container.Resolve<UsesSimpleComponent1>();
 
@@ -121,12 +121,12 @@ namespace Castle.Proxies
 		public void Forwarded_type_proxy_implements_all_service_types_interface_services_only()
 		{
 			Container.Register(Component.For<StandardInterceptor>()
-			                   	.Named("a")
-			                   	.LifeStyle.Transient,
-			                   Component.For<ICommon, ICommon2>()
-			                   	.ImplementedBy<TwoInterfacesImpl>()
-			                   	.Interceptors("a")
-			                   	.LifeStyle.Transient);
+								   .Named("a")
+								   .LifeStyle.Transient,
+							   Component.For<ICommon, ICommon2>()
+								   .ImplementedBy<TwoInterfacesImpl>()
+								   .Interceptors("a")
+								   .LifeStyle.Transient);
 
 			var common = Container.Resolve<ICommon>();
 			var common2 = Container.Resolve<ICommon2>();
@@ -138,12 +138,12 @@ namespace Castle.Proxies
 		public void Forwarded_type_proxy_implements_all_service_types_interface_and_class_services()
 		{
 			Container.Register(Component.For<StandardInterceptor>()
-			                   	.Named("a")
-			                   	.LifeStyle.Transient,
-			                   Component.For<ICommon, ICommon2, TwoInterfacesImpl>()
-			                   	.ImplementedBy<TwoInterfacesImpl>()
-			                   	.Interceptors("a")
-			                   	.LifeStyle.Transient);
+								   .Named("a")
+								   .LifeStyle.Transient,
+							   Component.For<ICommon, ICommon2, TwoInterfacesImpl>()
+								   .ImplementedBy<TwoInterfacesImpl>()
+								   .Interceptors("a")
+								   .LifeStyle.Transient);
 
 			var common = Container.Resolve<ICommon>();
 			var common2 = Container.Resolve<ICommon2>();
@@ -157,12 +157,12 @@ namespace Castle.Proxies
 		public void Forwarded_type_proxy_implements_all_service_types_class_and_interface_services()
 		{
 			Container.Register(Component.For<StandardInterceptor>()
-			                   	.Named("a")
-			                   	.LifeStyle.Transient,
-			                   Component.For<TwoInterfacesImpl, ICommon2, ICommon>()
-			                   	.ImplementedBy<TwoInterfacesImpl>()
-			                   	.Interceptors("a")
-			                   	.LifeStyle.Transient);
+								   .Named("a")
+								   .LifeStyle.Transient,
+							   Component.For<TwoInterfacesImpl, ICommon2, ICommon>()
+								   .ImplementedBy<TwoInterfacesImpl>()
+								   .Interceptors("a")
+								   .LifeStyle.Transient);
 
 			var common = Container.Resolve<ICommon>();
 			var common2 = Container.Resolve<ICommon2>();
@@ -176,11 +176,11 @@ namespace Castle.Proxies
 		public void Proxy_implements_only_service_interfaces()
 		{
 			Container.Register(Component.For<CountingInterceptor>()
-			                   	.Named("a"),
-			                   Component.For<ICommon>()
-			                   	.ImplementedBy<TwoInterfacesImpl>()
-			                   	.Interceptors("a")
-			                   	.LifeStyle.Transient);
+								   .Named("a"),
+							   Component.For<ICommon>()
+								   .ImplementedBy<TwoInterfacesImpl>()
+								   .Interceptors("a")
+								   .LifeStyle.Transient);
 
 			var common = Container.Resolve<ICommon>();
 
@@ -191,12 +191,12 @@ namespace Castle.Proxies
 		public void Proxy_implements_only_service_interfaces_or_explicitly_added_interfaces()
 		{
 			Container.Register(Component.For<CountingInterceptor>()
-			                   	.Named("a"),
-			                   Component.For<ICommon>()
-			                   	.ImplementedBy<TwoInterfacesImpl>()
-			                   	.Interceptors("a")
-			                   	.Proxy.AdditionalInterfaces(typeof(ICommon2))
-			                   	.LifeStyle.Transient);
+								   .Named("a"),
+							   Component.For<ICommon>()
+								   .ImplementedBy<TwoInterfacesImpl>()
+								   .Interceptors("a")
+								   .Proxy.AdditionalInterfaces(typeof(ICommon2))
+								   .LifeStyle.Transient);
 
 			var common = Container.Resolve<ICommon>();
 
@@ -208,12 +208,12 @@ namespace Castle.Proxies
 		public void RequestMarshalByRefProxyWithAttribute()
 		{
 			Container.Register(Component.For<StandardInterceptor>(),
-			                   Component.For<ICalcService>().ImplementedBy<CalculatorServiceWithMarshalByRefProxyBehavior>());
+							   Component.For<ICalcService>().ImplementedBy<CalculatorServiceWithMarshalByRefProxyBehavior>());
 
 			var calcService = Container.Resolve<ICalcService>();
 
 			Assert.IsNotInstanceOf<CalculatorServiceWithMarshalByRefProxyBehavior>(calcService,
-			                                                                       "Service proxy should not expose CalculatorServiceWithMarshalByRefProxyBehavior");
+																				   "Service proxy should not expose CalculatorServiceWithMarshalByRefProxyBehavior");
 			Assert.IsInstanceOf<MarshalByRefObject>(calcService, "Service proxy should expose MarshalByRefObject");
 			Assert.IsNotInstanceOf<IDisposable>(calcService, "Service proxy should expose the IDisposable interface");
 		}

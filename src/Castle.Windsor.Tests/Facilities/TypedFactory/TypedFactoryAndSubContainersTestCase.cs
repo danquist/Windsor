@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Facilities.TypedFactory.Components
+namespace CastleTests.Facilities.TypedFactory
 {
 	using Castle.Facilities.TypedFactory;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Facilities.TypedFactory.Factories;
+	using Castle.Windsor;
 
-	using CastleTests;
 	using CastleTests.Components;
+	using CastleTests.Facilities.TypedFactory.Components;
 	using CastleTests.Facilities.TypedFactory.Factories;
 
 	using NUnit.Framework;
@@ -39,7 +39,7 @@ namespace Castle.Windsor.Tests.Facilities.TypedFactory.Components
 
 			Container.Register(Component.For<IDummyComponent>().ImplementedBy<Component1>());
 			childContainer.Register(Component.For<IDummyComponentFactory>().AsFactory(),
-			                        Component.For<IDummyComponent>().ImplementedBy<Component2>());
+									Component.For<IDummyComponent>().ImplementedBy<Component2>());
 
 			var fromParent = Container.Resolve<IDummyComponent>();
 			var fromFactory = childContainer.Resolve<IDummyComponentFactory>().CreateDummyComponent();
@@ -56,7 +56,7 @@ namespace Castle.Windsor.Tests.Facilities.TypedFactory.Components
 		{
 			Container.AddFacility<TypedFactoryFacility>();
 			Container.Register(Component.For<IGenericFactory<A>>().AsFactory(),
-			                   Component.For<A>());
+							   Component.For<A>());
 
 			// uncomment the line below and the test will not fail
 			//container.Resolve<ISomeFactory>();

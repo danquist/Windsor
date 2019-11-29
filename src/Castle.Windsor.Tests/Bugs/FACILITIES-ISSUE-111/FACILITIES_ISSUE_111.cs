@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Windsor.Tests.Bugs.FACILITIES_ISSUE_111
+namespace CastleTests.Bugs
 {
 	using Castle.Core.Resource;
+	using Castle.Windsor;
 	using Castle.Windsor.Configuration.Interpreters;
 
 	using NUnit.Framework;

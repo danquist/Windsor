@@ -18,9 +18,9 @@ namespace CastleTests.Proxies
 
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
-	using Castle.Windsor.Tests.Interceptors;
 
 	using CastleTests.Components;
+	using CastleTests.Interceptors;
 
 	using NUnit.Framework;
 
@@ -66,7 +66,7 @@ namespace CastleTests.Proxies
 			Container.Register(Component.For<A>().Interceptors("fooInterceptor"));
 			var exception =
 				Assert.Throws<HandlerException>(() =>
-				                                Container.Resolve<A>());
+												Container.Resolve<A>());
 			var message =
 				string.Format(
 					"Can't create component '{1}' as it has dependencies to be satisfied.{0}{0}'{1}' is waiting for the following dependencies:{0}- Component 'fooInterceptor' (via override) which was not found. Did you forget to register it or misspelled the name? If the component is registered and override is via type make sure it doesn't have non-default name assigned explicitly or override the dependency via name.{0}",
@@ -82,7 +82,7 @@ namespace CastleTests.Proxies
 			Container.Register(Component.For<A>().Interceptors<ReturnDefaultInterceptor>());
 			var exception =
 				Assert.Throws<HandlerException>(() =>
-				                                Container.Resolve<A>());
+												Container.Resolve<A>());
 			var message =
 				string.Format(
 					"Can't create component '{1}' as it has dependencies to be satisfied.{0}{0}'{1}' is waiting for the following dependencies:{0}- Component '{2}' (via override) which was not found. Did you forget to register it or misspelled the name? If the component is registered and override is via type make sure it doesn't have non-default name assigned explicitly or override the dependency via name.{0}",

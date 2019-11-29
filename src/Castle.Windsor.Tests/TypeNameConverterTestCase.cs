@@ -19,7 +19,6 @@ namespace CastleTests
 
 	using Castle.DynamicProxy;
 	using Castle.MicroKernel.SubSystems.Conversion;
-	using Castle.MicroKernel.Tests.ClassComponents;
 
 	using CastleTests.ClassComponents;
 	using CastleTests.Components;
@@ -51,9 +50,9 @@ namespace CastleTests
 		{
 			var type = typeof(IDoubleGeneric<ICustomer, IGeneric<ICustomer>>);
 			var name = type.Name + "[[" +
-			           typeof(ICustomer).Name + "],[" +
-			           typeof(IGeneric<>).Name + "[[" + typeof(ICustomer).Name + "]]"
-			           + "]]";
+					   typeof(ICustomer).Name + "],[" +
+					   typeof(IGeneric<>).Name + "[[" + typeof(ICustomer).Name + "]]"
+					   + "]]";
 			var result = converter.PerformConversion(name, typeof(Type));
 			Assert.AreEqual(type, result);
 		}
@@ -63,15 +62,15 @@ namespace CastleTests
 		{
 			var type = typeof(IDoubleGeneric<IDoubleGeneric<ICustomer, IEmptyService>, ICustomer>);
 			var name = typeof(IDoubleGeneric<,>).Name
-			           + "[[" +
-			           typeof(IDoubleGeneric<,>).Name +
-			           "[[" +
-			           typeof(ICustomer).Name + "],[" +
-			           typeof(IEmptyService).Name
-			           + "]]"
-			           + "],[" +
-			           typeof(ICustomer).Name +
-			           "]]";
+					   + "[[" +
+					   typeof(IDoubleGeneric<,>).Name +
+					   "[[" +
+					   typeof(ICustomer).Name + "],[" +
+					   typeof(IEmptyService).Name
+					   + "]]"
+					   + "],[" +
+					   typeof(ICustomer).Name +
+					   "]]";
 			var result = converter.PerformConversion(name, typeof(Type));
 			Assert.AreEqual(type, result);
 		}
@@ -81,14 +80,14 @@ namespace CastleTests
 		{
 			var type = typeof(IDoubleGeneric<ICustomer, IDoubleGeneric<ICustomer, IEmptyService>>);
 			var name = typeof(IDoubleGeneric<,>).Name
-			           + "[[" +
-			           typeof(ICustomer).Name + "],[" +
-			           typeof(IDoubleGeneric<,>).Name +
-			           "[[" +
-			           typeof(ICustomer).Name + "],[" +
-			           typeof(IEmptyService).Name
-			           + "]]"
-			           + "]]";
+					   + "[[" +
+					   typeof(ICustomer).Name + "],[" +
+					   typeof(IDoubleGeneric<,>).Name +
+					   "[[" +
+					   typeof(ICustomer).Name + "],[" +
+					   typeof(IEmptyService).Name
+					   + "]]"
+					   + "]]";
 			var result = converter.PerformConversion(name, typeof(Type));
 			Assert.AreEqual(type, result);
 		}
@@ -144,7 +143,7 @@ namespace CastleTests
 			var type = typeof(IGeneric<IService2>);
 			var name = type.Name + "[[" + typeof(IService2).Name + "]]";
 			TestDelegate code = () =>
-			                    converter.PerformConversion(name, typeof(Type));
+								converter.PerformConversion(name, typeof(Type));
 
 			var exception =
 				Assert.Throws(typeof(ConverterException), code);
@@ -157,7 +156,7 @@ namespace CastleTests
 			var type = typeof(IService2);
 			var name = type.Name;
 			TestDelegate code = () =>
-			                    converter.PerformConversion(name, typeof(Type));
+								converter.PerformConversion(name, typeof(Type));
 
 			var exception =
 				Assert.Throws(typeof(ConverterException), code);

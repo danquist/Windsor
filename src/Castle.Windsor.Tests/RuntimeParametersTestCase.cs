@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Tests
+namespace CastleTests
 {
 	using System;
 	using System.Collections.Generic;
 
+	using Castle.MicroKernel;
 	using Castle.MicroKernel.Handlers;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers;
-	using Castle.MicroKernel.Tests.RuntimeParameters;
 	using Castle.Windsor;
 
-	using CastleTests;
+	using CastleTests.RuntimeParameters;
 
 	using NUnit.Framework;
 
@@ -41,7 +41,7 @@ namespace Castle.MicroKernel.Tests
 
 			Assert.AreSame(dependencies["cc"], compb.Compc, "CompC property should be the same instnace as in the hashtable argument");
 			Assert.IsTrue("ernst".Equals(compb.MyArgument),
-			              string.Format("The MyArgument property of compb should be equal to ernst, found {0}", compb.MyArgument));
+						  string.Format("The MyArgument property of compb should be equal to ernst, found {0}", compb.MyArgument));
 		}
 
 		[Test]
@@ -49,7 +49,7 @@ namespace Castle.MicroKernel.Tests
 		{
 			var kernel = new DefaultKernel();
 			kernel.Register(Component.For<NeedClassWithCustomerDependency>(),
-			                Component.For<HasCustomDependency>().DependsOn(new Dictionary<object, object> { { "name", new CompA() } }));
+							Component.For<HasCustomDependency>().DependsOn(new Dictionary<object, object> { { "name", new CompA() } }));
 
 			Assert.AreEqual(HandlerState.Valid, kernel.GetHandler(typeof(HasCustomDependency)).CurrentState);
 			Assert.IsNotNull(kernel.Resolve(typeof(NeedClassWithCustomerDependency)));
@@ -59,9 +59,9 @@ namespace Castle.MicroKernel.Tests
 		public void Missing_service_is_correctly_detected()
 		{
 			Container.Register(Component.For<CompA>().Named("compa"),
-			                   Component.For<CompB>().Named("compb"));
+							   Component.For<CompB>().Named("compb"));
 			TestDelegate act = () =>
-			                   Container.Resolve<CompB>(new Arguments().AddNamed("myArgument", 123));
+							   Container.Resolve<CompB>(new Arguments().AddNamed("myArgument", 123));
 
 			var exception = Assert.Throws<DependencyResolverException>(act);
 			Assert.AreEqual(
@@ -75,8 +75,8 @@ namespace Castle.MicroKernel.Tests
 		public void Parameter_takes_precedence_over_registered_service()
 		{
 			Container.Register(Component.For<CompA>(),
-			                   Component.For<CompB>().DependsOn(Dependency.OnValue<string>("some string")),
-			                   Component.For<CompC>().Instance(new CompC(0)));
+							   Component.For<CompB>().DependsOn(Dependency.OnValue<string>("some string")),
+							   Component.For<CompC>().Instance(new CompC(0)));
 
 			var c2 = new CompC(42);
 			var args = new Arguments().AddTyped(c2);
@@ -89,7 +89,7 @@ namespace Castle.MicroKernel.Tests
 		public void ParametersPrecedence()
 		{
 			Container.Register(Component.For<CompA>().Named("compa"),
-			                   Component.For<CompB>().Named("compb").DependsOn(dependencies));
+							   Component.For<CompB>().Named("compb").DependsOn(dependencies));
 
 			var instance_with_model = Container.Resolve<CompB>();
 			Assert.AreSame(dependencies["cc"], instance_with_model.Compc, "Model dependency should override kernel dependency");
@@ -106,7 +106,7 @@ namespace Castle.MicroKernel.Tests
 		public void ResolveUsingParameters()
 		{
 			Container.Register(Component.For<CompA>().Named("compa"),
-			                   Component.For<CompB>().Named("compb"));
+							   Component.For<CompB>().Named("compb"));
 			var compb = Container.Resolve<CompB>(dependencies);
 
 			AssertDependencies(compb);
@@ -116,7 +116,7 @@ namespace Castle.MicroKernel.Tests
 		public void ResolveUsingParametersWithinTheHandler()
 		{
 			Container.Register(Component.For<CompA>().Named("compa"),
-			                   Component.For<CompB>().Named("compb").DependsOn(dependencies));
+							   Component.For<CompB>().Named("compb").DependsOn(dependencies));
 
 			var compb = Container.Resolve<CompB>();
 
@@ -127,8 +127,8 @@ namespace Castle.MicroKernel.Tests
 		public void WillAlwaysResolveCustomParameterFromServiceComponent()
 		{
 			Container.Register(Component.For<CompA>(),
-			                   Component.For<CompB>().DependsOn(new { myArgument = "foo" }),
-			                   Component.For<CompC>().DependsOn(new { test = 15 }));
+							   Component.For<CompB>().DependsOn(new { myArgument = "foo" }),
+							   Component.For<CompC>().DependsOn(new { test = 15 }));
 			var b = Kernel.Resolve<CompB>();
 			Assert.IsNotNull(b);
 			Assert.AreEqual(15, b.Compc.test);
@@ -138,7 +138,7 @@ namespace Castle.MicroKernel.Tests
 		public void WithoutParameters()
 		{
 			Container.Register(Component.For<CompA>().Named("compa"),
-			                   Component.For<CompB>().Named("compb"));
+							   Component.For<CompB>().Named("compb"));
 			var expectedMessage =
 				string.Format(
 					"Can't create component 'compb' as it has dependencies to be satisfied.{0}{0}'compb' is waiting for the following dependencies:{0}- Service 'Castle.MicroKernel.Tests.RuntimeParameters.CompC' which was not registered.{0}- Parameter 'myArgument' which was not provided. Did you forget to set the dependency?{0}",

@@ -18,10 +18,9 @@ namespace CastleTests.Installer
 
 	using Castle.Windsor;
 	using Castle.Windsor.Configuration.Interpreters;
-	using Castle.Windsor.Tests;
-	using Castle.XmlFiles;
 
 	using CastleTests.Components;
+	using CastleTests.XmlFiles;
 
 	using NUnit.Framework;
 

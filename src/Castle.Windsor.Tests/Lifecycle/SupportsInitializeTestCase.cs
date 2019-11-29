@@ -13,11 +13,10 @@
 // limitations under the License.
 
 #if FEATURE_ISUPPORTINITIALIZE
-namespace Castle.Windsor.Tests.Lifecycle
+namespace CastleTests.Lifecycle
 {
 	using Castle.MicroKernel.Registration;
 
-	using CastleTests;
 	using CastleTests.Components;
 
 	using NUnit.Framework;
@@ -29,8 +28,8 @@ namespace Castle.Windsor.Tests.Lifecycle
 		public void SupportsInitialize_components_are_not_tracked()
 		{
 			Container.Register(Component.For<ISimpleService>()
-			                   	.ImplementedBy<SimpleServiceSupportInitialize>()
-			                   	.LifeStyle.Transient);
+								   .ImplementedBy<SimpleServiceSupportInitialize>()
+								   .LifeStyle.Transient);
 
 			ReferenceTracker
 				.Track(() => Container.Resolve<ISimpleService>())
@@ -41,8 +40,8 @@ namespace Castle.Windsor.Tests.Lifecycle
 		public void SupportsInitialize_components_for_non_SupportsInitialize_service_get_initialized_when_resolved()
 		{
 			Container.Register(Component.For<ISimpleService>()
-			                   	.ImplementedBy<SimpleServiceSupportInitialize>()
-			                   	.LifeStyle.Transient);
+								   .ImplementedBy<SimpleServiceSupportInitialize>()
+								   .LifeStyle.Transient);
 
 			var server = (SimpleServiceSupportInitialize)Container.Resolve<ISimpleService>();
 
@@ -55,8 +54,8 @@ namespace Castle.Windsor.Tests.Lifecycle
 			SupportsInitialize_components_for_non_SupportsInitialize_service_get_initialized_when_resolved_via_factoryMethod()
 		{
 			Container.Register(Component.For<ISimpleService>()
-			                   	.UsingFactoryMethod(() => new SimpleServiceSupportInitialize())
-			                   	.LifeStyle.Transient);
+								   .UsingFactoryMethod(() => new SimpleServiceSupportInitialize())
+								   .LifeStyle.Transient);
 
 			var server = (SimpleServiceSupportInitialize)Container.Resolve<ISimpleService>();
 
